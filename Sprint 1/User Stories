@@ -1,1 +1,106 @@
 User Stories
+
+1. 
+
+User story: 
+As a user, I want to be able to securely create an account using my email as an username and a password to protect my personal information. 
+
+Acceptance Criteria:
+-I can use my email as a username during registration 
+-I can create a password 
+-I can receive a confirmation email to verify my account 
+-I can be sure that my email and my password are securely stored. 
+
+Priority: 
+High
+
+2. 
+
+User story: 
+As a homebuyer or a property renter, I want to be able to narrow down the property search based on multiple criteria to ensure that the listings I see match my preferences. 
+
+Acceptance Criteria:
+-I can click on the property search on the homepage. 
+-I can add one or multiple filters to narrow down the search.
+-I can see the la user friendly list of all properties matching the criteria I added as filters.
+-I can click on the property to see its description. 
+
+Priority: 
+High
+
+
+3.
+
+User story: 
+As a homebuyer or a property renter, I want to be able to see the broker's information within each property's description so I can be able to contact them and/or request a visit through the platform directly.
+
+Acceptance criteria: 
+-I can see the broker's contact information, including their name, phone number, and email address on the description of the property.
+-I can click on the "Request visit" button and receive a confirmation email that the visit request process has begun. 
+-I can be sure that the broker receives my request. 
+
+Priority: 
+High for the broker's information. Medium for the visit request through the website. 
+
+
+4. 
+
+As a broker, I want to be able to create, read, update, and/or delete listings to ensure that the properties shown are up to date. 
+
+Acceptance criteria: 
+
+Create:
+	-I can add a listing by filling out a detailed description form.
+	-I can receive a confirmation that the listing was added.
+	-I can see the listing on the search list. 
+Read:
+	-I can view a detailed description of a selected property. 
+Update:
+	-I can click on the "Edit" button on the selected property to update the information.
+	-I can save the updated information.
+	-I can receive a confirmation that the listing was updated. 
+	-I can only see the updated version of the listing on the search list. 
+Delete: 
+	-I can click on the "Delete" button on the selected property.
+	-I can see a "Are you sure you want to delete this listing?" and answer YES or NO to prevent 																    accidental deletions.
+	-If I click YES, I can receive a confirmation that the listing was deleted and I can't see it on the search list.
+	-If I click NO, I can be returned to the description page of the listing and still see it on the search list. 
+
+	-I can be sure that only authorized users can perform CRUD operations on properties. 
+
+Priority:
+High 
+
+
+5. 
+
+User story: 
+As a system administrator, I want to be able to add, read, update or delete broker profiles to ensure that the information is accurate and protect the integrity of the website. 
+
+Acceptance criteria: 
+-I can access a secure admin pannel that allows me to manage brokers. 
+
+Create:
+	-I can click on "Create a broker" button that bring me to a description form.
+	-I can fill out the form entering the broker's information. 
+	-I can submit a new profile. 
+	-I can receive a confirmation that the new profile has been created. 
+Read: 
+	-I can search for a specific broker by adding filters (name, contact information, etc.)
+	-I can see the list of the brokers matching my criteria. 
+	-I can click on the broker's profile and access its information. 
+Update: 
+	-I can click on the "Edit" button on a selected profile.
+	-I can update the details of the broker's profile.
+	-I can receive the confirmation that the profile has been updated. 
+	--I can only see the updated profile of the broker. 
+Delete: 
+	-I can click on the "Delete" button on the selected broker's profile.
+	-I can see a "Are you sure you want to delete this listing?" and answer YES or NO to prevent 																    accidental deletions.
+	-If I click YES, I can receive a confirmation that the profile has been deleted and I can't see it on the brokers' search list.
+	-If I click NO, I can be returned to the broker's profile and still see it on the brokers' search list. 
+	 
+Priority: 
+High 
+
+ 
