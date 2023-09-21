@@ -9,6 +9,6 @@ Team members and roles: Abilash Sasitharan (Front-End)
                         Nabih El-helou (Front-End)
                         Penoelo Thibeaud (Back-End)
 
-Project approach and Technology: We'll be using React for Front-End, Java for Back-End and SQL for databases.                    
+Project approach and Technology: We'll be using React for Front-End, Java for Back-End and SQL for databases. We are also using the Google Maps API to show location of properties.                   
                   
                         
