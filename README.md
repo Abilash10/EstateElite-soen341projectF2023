@@ -1,4 +1,4 @@
-# AJPKNK-soen341projectF2023
+# EstateElite-soen341projectF2023
 
 Description of the project: Build a real-estate website with our personalized features. Our main features consist of searching for properties (based on criterias such location, pricing, amenities, rooms, living and lot areas, time in the market parking availability, garage space, building type and year built). In addition, we will insert a map that contains the location of each house with the Google Maps API.  
 
