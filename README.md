@@ -1,14 +1,21 @@
 # EstateElite-soen341projectF2023
 
-Description of the project: Build a real-estate website with our personalized features. Our main features consist of searching for properties (based on criterias such location, pricing, amenities, rooms, living and lot areas, time in the market parking availability, garage space, building type and year built). In addition, we will insert a map that contains the location of each house with the Google Maps API.  
+<h3>Description of the project</h3>
+A real-estate webapp with our personalized features. The core features consist of searching for properties (based on filter criterias such location, pricing, amenities, rooms, living and lot areas, time in the market parking availability, garage space, building type and year built). In addition, a map view will be a feature that shows the location of each property on an interactive map with the Google Maps API.  
 
-Team members and roles: Abilash Sasitharan (Front-End)
-                        Joerexpradeepan Thambaiah (Back-End)
-                        Kilian Hedou ( Front-End)
-                        Kateryna Sizova (Back-End)
-                        Nabih El-helou (Front-End)
-                        Penoelo Thibeaud (Back-End)
-
-Project approach and Technology: We'll be using React for Front-End, Java for Back-End and SQL for databases. We are also using the Google Maps API to show location of properties.                   
+<h3>Team members and roles</h3>
+  <ul>
+  <li>Abilash Sasitharan (Front-End)</li>
+  <li>Joerexpradeepan Thambaiah (Back-End)</li>
+  <li>Kilian Hedou (Front-End)</li>
+  <li>Kateryna Sizova (Back-End)</li>
+  <li>Nabih El-helou (Front-End)</li>
+  <li>Penoelo Thibeaud (Back-End)</li>
+</ul>
+<h3>Project approach and Technology</h3>
+Front-End: React<br>
+Back-End: Java<br>
+Database: SQL databases<br>
+The Google Maps API will be used to show location of properties on a map.                   
                   
                         
