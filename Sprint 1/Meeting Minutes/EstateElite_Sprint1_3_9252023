@@ -4,16 +4,33 @@ Date: Thursday 28th September, 2023
 
 Time: 04:15 pm to 06:15 pm
 
-Location: Hall building, room H827
+Location: Hall Building, Room H827
 
-Present: Abilash Sasitharan, Joerexpradeepan Thambaiah, Kilian Hedou, Kateryna Sizova, Nabih El-helou, Penoelo Thibeaud
+Present: Abilash Sasitharan, Joerexpradeepan Thambaiah, Kilian Hedou, Kateryna Sizova, Nabih El-Helou, Penoelo Thibeaud
 
 Absent: None
 
 Agenda: 
 
+Discuss Changes to the technology Stack used 
+Established new goals
+Discussed Reformating of User stories
 
 
 Minutes:
+
+We decided to shift to the M.E.R.N technology stack ( MongoDB: A NoSQL database - Express.js - React.js - Node.js ) for front and backend
+
+We establish the short term goals for the teams.
+    
+    Backend :
+        -Familiarise with JavaScript
+        -Create a house/user database
+    
+    Other :
+        -create a user storing method on Google Sheets
+        -The wiki/readme/Google Sheets will need an update 
+        -Define sprint 1 completion deadlines
+
 
 
