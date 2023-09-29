@@ -46,7 +46,7 @@ Drawbacks: Smaller community compared to React, fewer job opportunities.<br><br>
 Strengths: Full-fledged framework, two-way data binding, TypeScript integration.<br>
 Drawbacks: Steeper learning curve, heavy for simple applications.
                   
-<h3>Installation Instructions</h3>
+<h3>Installation & Usage Instructions</h3>
 <a href='https://blog.nextideatech.com/how-to-get-started-with-the-mern-stack-a-comprehensive-guide/'>MERN Full Guide</a><br>
 <a href='https://www.mongodb.com/docs/manual/introduction/'>MongoDB Usage Guide</a><br>
 <a href='https://www.w3schools.com/react/react_getstarted.asp'>Creating a React Application</a><br>
