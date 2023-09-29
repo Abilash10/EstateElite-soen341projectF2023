@@ -17,7 +17,8 @@ We will be using the MERN tech stack.<br>
 Front-End: React<br>
 Back-End: Node.js & Express.js<br>
 Database: MongoDB<br>
-The Google Maps API will be used to show location of properties on a map.<br><br>                   
+The Google Maps API will be used to show location of properties on a map.<br><br>
+To host our webapp, we have a DigitalOcean server.<br><br>                   
 The reason these technologies were chosen is because we really wanted to use React for our front-end. It is a very useful framework to know, being used in many companies today. Furthermore, we wanted to use MongoDB over an SQL database since our research led us to believe it would be easier to learn and implement for our project. A big element we had to consider as well was every team member needs to learn the language needed for the project. The MERN stack is built on javascript, so we mainly need to focus our learning on one language.<br>
 To arrive to our tech-stack decision we did assessments on several front-end and back-end frameworks.<br>
 <h4>Backend Frameworks</h4>
