@@ -12,9 +12,26 @@ Absent: None
 
 Agenda: 
 
-Confirm roles for sprint 1-2
-Establish deadline for short term task
-Discuss web hosting ?
+    -Confirm roles for sprint 1-2
+    -Establish deadline for short term task
+    -web hosting 
 
 
 Minutes:
+
+We confirmed the task division for each team members 
+
+We establish the short term goals for the teams:
+    
+    Backend :
+        -research on potential add on/technologies
+        -Familiarise with js
+        -Create a house/user access databasee
+    
+    Other :
+        -create a user storing method on google sheet
+        -The wiki/readme/ will need an update 
+        - Sprint 1 completion deadlines
+
+
+We discussed the possibility of hosting our page on the web
