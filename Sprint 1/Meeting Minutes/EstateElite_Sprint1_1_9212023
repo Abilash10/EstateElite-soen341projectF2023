@@ -12,18 +12,18 @@ Absent: None
 
 Agenda: 
 
-Name of team
-Name of the app
-Set up a private repository on Github
-User stories
+    Name of team
+    Name of the app
+    Set up a private repository on Github
+    User stories
 
 Minutes: 
 
-Team members researched and familiarized themselves with Github
+    Team members researched and familiarized themselves with Github
 
-We decided on the team name and the app name: EstateElite.
-We created the github repository, and set up the ReadME file. 
+    We decided on the team name and the app name: EstateElite.
+    We created the github repository, and set up the ReadME file. 
 
-We discussed what core features we want in the webapp.
-User stories were created for Sprint 1.
+    We discussed what core features we want in the webapp.
+    User stories were created for Sprint 1.
 
