@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-//Don't put password directly in here, we will secure using github secrets
-mongoose.connect("mongodb+srv://eeteam:<password>@estate-elite.ar82uwe.mongodb.net/?estate-eliteretryWrites=true&w=majority");
+//This is not secure way to connect to database, but for now it will work
+mongoose.connect("mongodb+srv://eeteam:EstateElite123456@estate-elite.ar82uwe.mongodb.net/estate-elite?retryWrites=true&w=majority");
 
 app.listen(3001, () => console.log('Server Started'));
