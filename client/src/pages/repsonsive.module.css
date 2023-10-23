@@ -19,8 +19,11 @@
   
   .header {
     background-color: black;
-    color: #cbb26a;
+    /*color: #cbb26a;*/
+    color: white;
     padding: 15px;
+    display: flex;
+    flex-direction: row;
   }
   
   .menu ul {
