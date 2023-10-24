@@ -35,8 +35,8 @@
 .buttonContainer {
     display: flex;
     justify-content: flex-end; /* push content to the right */
-    width: 50%; /* same as searchBox */
-    margin: 5px auto 0 auto; /* 5px margin-top for spacing */
+    width: 50%;
+    margin: 5px auto 0 auto;
 }
 
 .advancedFiltersBtn {
