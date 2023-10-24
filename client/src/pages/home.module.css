@@ -37,9 +37,10 @@
     justify-content: flex-end; /* push content to the right */
     width: 50%;
     margin: 5px auto 0 auto;
+    gap: 10px;
 }
 
-.advancedFiltersBtn {
+.advancedFiltersBtn, .searchBtn {
     background-color: #000000;
     color: #ffffff;
     border-radius: 10px;
@@ -48,4 +49,10 @@
     font-size: 18px;
     outline: none;
     cursor: pointer;
+    transition: 0.1s;
+}
+
+.advancedFiltersBtn:hover, .searchBtn:hover {
+    background-color: #cbb26a;
+    color: #000000;
 }
