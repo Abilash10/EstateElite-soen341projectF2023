@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useState } from "react";
+
 import './App.css';
 import Auth from "./pages/auth";
 import Home from "./pages/home";
@@ -9,14 +11,24 @@ import styles from "./pages/repsonsive.module.css";
 import './App.css';
 
 function App() {
+  const [isBroker, setIsBroker] = useState(false);
   return (
     <div className="App">
     <Router> 
       <Header />
-      <NavBar menuStyle= {styles.menu}/>
+      <NavBar 
+        menuStyle= {styles.menu} 
+        isBroker={isBroker} 
+        setIsBroker={setIsBroker}
+        />
       <Routes> 
         <Route path='/' element={ <Home />} >  </Route>
-        <Route path='/Auth' element= {<Auth />} >  </Route>
+        <Route 
+          path='/Auth'
+          element= {<Auth 
+                      isBroker={isBroker} 
+                      setIsBroker={setIsBroker} 
+                      />} >  </Route>
       </Routes>
       <Footer />
     </Router>
