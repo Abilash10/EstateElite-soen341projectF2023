@@ -1,0 +1,51 @@
+.main {
+    background-image: url("../assets/HouseBackground.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 82vh;
+}
+
+.searchContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 85%;
+    width: 100%;
+}
+
+.searchBox {
+    width: 50%;
+    height: 50px;
+    border-radius: 20px;
+    border: 2px solid #000000;
+    padding: 10px;
+    font-size: 18px;
+    outline: none;
+    font-size: 24px;
+    margin: 0 auto;
+}
+
+.searchBox::placeholder {
+    font-size: 24px;
+    color: #ced4db;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end; /* push content to the right */
+    width: 50%;
+    margin: 5px auto 0 auto;
+}
+
+.advancedFiltersBtn {
+    background-color: #000000;
+    color: #ffffff;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    font-size: 18px;
+    outline: none;
+    cursor: pointer;
+}
