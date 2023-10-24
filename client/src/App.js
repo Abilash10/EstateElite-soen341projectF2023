@@ -13,7 +13,6 @@ function App() {
     <div className="App">
     <Router> 
       <Header />
-      <NavBar menuStyle= {styles.menu}/>
       <Routes> 
         <Route path='/' element={ <Home />} >  </Route>
         <Route path='/Auth' element= {<Auth />} >  </Route>
