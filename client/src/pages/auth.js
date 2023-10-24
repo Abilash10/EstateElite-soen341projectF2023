@@ -25,6 +25,17 @@ const Register = (props) => {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}/>
+                    <div> 
+                        <p>Are you a Broker ? </p>
+                        <label htmlFor="yes" > Yes </label>
+                        <input type="radio" id="yes" name="type_of_user" value="Yes"
+                                onClick={props.handleRadioYes} />
+
+                        <label htmlFor="no" > No</label>
+                        <input type="radio" id="no" name="type_of_user" value="No" 
+                                onClick={props.handleRadioNo}/>
+
+                    </div>
                 </div>
                 <br />
                 <button type="submit"> Register </button>
@@ -61,6 +72,17 @@ const Login = (props) => {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}/>
+                <div> 
+                        <p>Are you a Broker ? </p>
+                        <label htmlFor="yes" > Yes </label>
+                        <input type="radio" id="yes" name="type_of_user" value="Yes" 
+                                onClick={props.handleRadioYes} />
+
+                        <label htmlFor="no" > No</label>
+                        <input type="radio" id="no" name="type_of_user" value="No" 
+                                onClick={props.handleRadioNo} />
+
+                    </div>
                 </div>
                 <br />
                 <button type="submit"> Login </button>
@@ -76,15 +98,24 @@ const Login = (props) => {
 };
 
 
-function Auth() {
+function Auth(props) {
 
     const [haveAccount, setHaveAccount] = useState(true);
+    
 
 
     return (
         <div> 
-            { haveAccount ?  <Login onClick = {() => setHaveAccount(false)} /> : 
-              <Register onClick= {() => setHaveAccount(true)} /> }
+            { haveAccount ?  <Login 
+                onClick = {() => setHaveAccount(false)} 
+                handleRadioYes = {() => props.setIsBroker(true) } 
+                handleRadioNo = {() => props.setIsBroker(false)} /> 
+            : 
+              <Register 
+                onClick= {() => setHaveAccount(true)}
+                handleRadioYes = {() => props.setIsBroker(true) } 
+                handleRadioNo = {() => props.setIsBroker(false)} 
+               /> }
         </div>
     
     );

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./navbar.module.css";
 
-export const NavBar = () => {
+export const NavBar = (props) => {
     return (
      
         
@@ -12,7 +12,8 @@ export const NavBar = () => {
                 <li> <Link to="/"> Home </Link> </li>
                 <li> bla</li>
                 <li>bla</li>
-                <li>smple</li>
+
+               { props.isBroker ? <li> create listing</li> : <li> view listing</li>}
                 <li><Link to="/auth"> Login/Register </Link> </li>
               </ul>
             </div>
