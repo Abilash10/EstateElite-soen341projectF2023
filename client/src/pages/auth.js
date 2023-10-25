@@ -68,9 +68,31 @@ const Register = (props) => {
 const Login = (props) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+
+    const [_, setCookies] = useCookies(['access_token']);
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post("http://localhost:3001/auth/login", {
+                username, 
+                password,
+            });
+
+            setCookies('access_token', response.data.token);
+            window.localStorage.setItem('userID', response.data.userID);
+            window.localStorage.setItem('userType', response.data.userType);
+            window.location.pathname = '/';
+
+        } catch (err) {
+            console.error(err);
+        }
+        
+    };
+
     return (
         <div> 
-            <form>
+            <form onSubmit={onSubmit }>
                 <h2>Login </h2>
                <div>
                 <label htmlFor="username">Username: </label>

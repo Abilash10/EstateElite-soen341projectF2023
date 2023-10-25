@@ -33,7 +33,7 @@ router.post("/register",async(request,response)=>{
 
 router.post("/login",async (request,response)=>{
 
-    const {username,password}=request.body; //making API request for username and password
+    const {username,password, userType}=request.body; //making API request for username and password
 
     const user=await UserModel.findOne({username:username}) ; //checking is username is existant and if that's the case, we're assigning it a user object
 
@@ -52,7 +52,7 @@ router.post("/login",async (request,response)=>{
     }
 
     const token=jwt.sign({id:user._id},"secret");   //creating an API authentication
-    response.json({token, userID:user._id}); //giving a specific token and user ID to the user
+    response.json({token, userID:user._id, userType: user.userType}); //giving a specific token and user ID to the user
 
 });
 
