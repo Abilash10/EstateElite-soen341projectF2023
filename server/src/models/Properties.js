@@ -9,6 +9,7 @@ const PropertySchema = new mongoose.Schema({
     bedrooms: { type: Number, required: true },
     parking: { type: String, required: true },
     imageUrl: { type: String, required: true },
+    pool: { type: Boolean, required: true },
     userOwner: { type: mongoose.Schema.Types.ObjectId, ref: "users", required: true },
     visitRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: "users" }]
 });

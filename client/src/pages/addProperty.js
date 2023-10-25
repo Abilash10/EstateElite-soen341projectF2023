@@ -11,7 +11,7 @@ export const AddProperty = () => {
   const [property, setProperty] = useState({
     address: "",
     price: 0,
-    type: "",
+    type: "Rent",
     bathrooms: 1,
     bedrooms: 1,
     parking: 1,

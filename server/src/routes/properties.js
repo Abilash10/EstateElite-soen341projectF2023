@@ -18,6 +18,7 @@ router.get("/", async (req, res) => {
 
 // Create a new property
 router.post("/", verifyToken, async (req, res) => {
+  console.log("Received request body:", req.body)
   const property = new PropertyModel({
     ...req.body,  // Spread the request body to populate fields (address, price, etc.)
     _id: new mongoose.Types.ObjectId(),
@@ -27,6 +28,18 @@ router.post("/", verifyToken, async (req, res) => {
     const createdProperty = await property.save();
     res.status(201).json({ createdProperty });
     console.log('Received request body:', req.body);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Search properties by address
+router.get("/search/:address", async (req, res) => {
+  console.log("Search request received for address:", req.params.address);
+  try {
+    const addressRegex = new RegExp(req.params.address, 'i'); // Create a case-insensitive regex
+    const properties = await PropertyModel.find({ address: addressRegex });
+    res.status(200).json(properties);
   } catch (err) {
     res.status(500).json(err);
   }
