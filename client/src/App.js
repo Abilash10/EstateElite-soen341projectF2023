@@ -10,6 +10,7 @@ import Footer from "./components/footer";
 import styles from "./pages/repsonsive.module.css";
 import './App.css';
 import { AddProperty } from './pages/addProperty';
+import MyProperties from './pages/myproperties';
 
 function App() {
   const [isBroker, setIsBroker] = useState(false);
@@ -26,6 +27,10 @@ function App() {
                       setIsBroker={setIsBroker} 
                       />} >  </Route>
         <Route path='/addProperty' element={ <AddProperty /> } >  </Route>
+        <Route 
+          path='/MyProperties'
+          element = { <MyProperties />}
+        > </Route>
       </Routes>
       <Footer />
     </Router>
