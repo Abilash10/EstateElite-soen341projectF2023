@@ -21,6 +21,9 @@ function Header() {
             <div className={styles.menu}>
             <ul>
                 <li> <Link to="/"> Home </Link> </li>
+                { cookies.access_token && window.localStorage.getItem("userType") === "broker" ? <li>
+                    <Link to="/addProperty"> Add </Link> </li> : null
+                }
                 <li>Team</li>
                 <li>Contact</li>
 
