@@ -1,14 +1,32 @@
 import { useState } from "react";
-
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 
 const Register = (props) => {
     
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [userType, setUserType] = useState("buyer");
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await axios.post("http://localhost:3001/auth/register", {
+                username, 
+                password,
+                userType
+            });
+            alert("registration completed! Now login.")
+        } catch (err) {
+            console.error(err);
+        }
+        
+    };
+
     return (
         <div> 
-            <form>
+            <form onSubmit={onSubmit }>
                 <h2>Register </h2>
                <div>
                 <label htmlFor="username">Username: </label>
@@ -26,15 +44,12 @@ const Register = (props) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}/>
                     <div> 
-                        <p>Are you a Broker ? </p>
-                        <label htmlFor="yes" > Yes </label>
-                        <input type="radio" id="yes" name="type_of_user" value="Yes"
-                                onClick={props.handleRadioYes} />
-
-                        <label htmlFor="no" > No</label>
-                        <input type="radio" id="no" name="type_of_user" value="No" 
-                                onClick={props.handleRadioNo}/>
-
+                        <label htmlFor="userType">User Type: </label>
+                        <select name="userType" id="userType" onChange={(e) => setUserType(e.target.value)}>
+                            <option value="buyer">Buyer</option>
+                            <option value="renter">Renter</option>
+                            <option value="broker">Broker</option>
+                        </select>
                     </div>
                 </div>
                 <br />
@@ -72,17 +87,7 @@ const Login = (props) => {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}/>
-                <div> 
-                        <p>Are you a Broker ? </p>
-                        <label htmlFor="yes" > Yes </label>
-                        <input type="radio" id="yes" name="type_of_user" value="Yes" 
-                                onClick={props.handleRadioYes} />
 
-                        <label htmlFor="no" > No</label>
-                        <input type="radio" id="no" name="type_of_user" value="No" 
-                                onClick={props.handleRadioNo} />
-
-                    </div>
                 </div>
                 <br />
                 <button type="submit"> Login </button>
@@ -101,9 +106,7 @@ const Login = (props) => {
 function Auth(props) {
 
     const [haveAccount, setHaveAccount] = useState(true);
-    
-
-
+  
     return (
         <div> 
             { haveAccount ?  <Login 
