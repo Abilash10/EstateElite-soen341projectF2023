@@ -55,6 +55,21 @@ router.get("/:propertyId", async (req, res) => {
   }
 });
 
+router.delete("/:propertyId", async (req, res) => {
+  try {
+    const property = await PropertyModel.findByIdAndDelete(req.params.propertyId);
+
+    if (!property) {
+      return res.status(404).json({ message: "Property not found" });
+    }
+
+    res.status(200).json({ message: "Property deleted successfully", property });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
 router.put("/",async(request,response)=>{   //post request done to the server, to create a property
 
     try{
