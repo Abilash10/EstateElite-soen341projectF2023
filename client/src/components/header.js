@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 
 function Header() {
+    // Logout functions
     const [cookies, setCookies] = useCookies(["access_token"]);
     const navigate = useNavigate();
     const logout = () => {
@@ -15,13 +16,21 @@ function Header() {
         navigate("/auth");
     };
 
+    const userType = window.localStorage.getItem('userType');
+
+
+    
     return (
         <div className={styles.header}>
             <img className={styles.logo} src={logoImg} alt="logo" />
             <div className={styles.menu}>
             <ul>
                 <li> <Link to="/"> Home </Link> </li>
+
+                { userType == 'broker' ? <li> <Link to="/MyProperties"> My Properties </Link></li> : null }
+
                 <li>Team</li>
+
                 <li>Contact</li>
 
                 { !cookies.access_token ? 
