@@ -2,19 +2,12 @@ import styles from "./header.module.css";
 import { Link } from "react-router-dom";
 import logoImg from "../assets/EElogo.png";
 import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
-
+import useLogout from "../hooks/logoutUser";
 
 function Header() {
     // Logout functions
     const [cookies, setCookies] = useCookies(["access_token"]);
-    const navigate = useNavigate();
-    const logout = () => {
-        setCookies("access_token", "");
-        window.localStorage.removeItem("userID");
-        window.localStorage.removeItem("userType");
-        navigate("/auth");
-    };
+    const logout = useLogout();
 
     const userType = window.localStorage.getItem('userType');
 

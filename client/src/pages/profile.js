@@ -32,6 +32,27 @@ function Profile() {
         });
     }
 
+    const deleteAccount = async(id) => {
+        //Prompt user to confirm deletion
+        if (!window.confirm("Are you sure you want to delete your account?")) {
+            return;
+        }
+        const token = localStorage.getItem("token");
+    
+        axios.delete("http://localhost:3001/auth/deleteAccount", {
+            headers: {
+                'Authorization': token
+            }
+        }).then(response => {
+            // Handle success
+            alert("account deleted!");
+            window.location.pathname = '/';
+        }).catch(error => {
+            // Handle error
+            alert("error deleting account");
+        });
+    };
+
     return (
         <div>
             <h1> Profile </h1>
@@ -40,6 +61,7 @@ function Profile() {
                 <input type="password" id="newPassword" placeholder="Enter new password" />
                 <button onClick={changePassword}> Submit </button>
             </h3>
+            <button onClick={deleteAccount}>Delete Account</button>
 
         </div>
     );
