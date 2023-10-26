@@ -6,7 +6,33 @@ import { UserModel } from "../models/Users.js";
 //json is a data type used to send data from a server to a webpage
 
 const router=express.Router()
+export const verifyToken = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (authHeader) {
+    jwt.verify(authHeader, "secret", (err, user) => {
+      if (err) {
+        return res.sendStatus(403);
+      }
+      req.user = user; // attach the user info to the request object
+      next();
+    });
+  } else {
+    res.sendStatus(401);
+  }
+};
 
+
+//get username for a specific user ID
+router.get("/username/:userID",async (req,res)=>{
+  console.log("username request for: " + req.params.userID);
+    try{
+        const user = await UserModel.findById(req.params.userID);
+        res.status(200).json(user);
+    } catch(err){
+        res.status(500).json(err);
+    }
+}
+);
 
 router.post("/register",async(request,response)=>{
 
@@ -56,19 +82,33 @@ router.post("/login",async (request,response)=>{
 
 });
 
-export const verifyToken = (req, res, next) => {
-    const authHeader = req.headers.authorization;
-    if (authHeader) {
-      jwt.verify(authHeader, "secret", (err) => {
-        if (err) {
-          return res.sendStatus(403);
-        }
-        next();
-      });
-    } else {
-      res.sendStatus(401);
-    }
-  };
+//change password
+router.post("/changePassword", verifyToken, async (req, res) => {
+  console.log("change password request for: " + req.user.id);
+  const { newPassword } = req.body;
+
+  if(!newPassword) {
+      return res.status(400).json({ message: "New password is required!" });
+  }
+
+  try {
+      const userId = req.user.id;
+      const user = await UserModel.findById(userId);
+
+      if(!user) {
+          return res.status(404).json({ message: "User not found!" });
+      }
+
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+      user.password = hashedPassword;
+      await user.save();
+
+      res.json({ message: "Password changed successfully!" });
+      console.log("Password changed successfully!");
+  } catch(err) {
+      res.status(500).json({ message: err.message });
+  }
+});
 
 
 export {router as userRouter};

@@ -83,6 +83,7 @@ const Login = (props) => {
             window.localStorage.setItem('userID', response.data.userID);
             window.localStorage.setItem('userType', response.data.userType);
             window.location.pathname = '/';
+            localStorage.setItem("token", response.data.token);
 
         } catch (err) {
             console.error(err);
