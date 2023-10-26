@@ -48,12 +48,13 @@ function MyProperties() {
                             <h2> {property.address} </h2>
                         </div> 
                         <div className="info"> 
-                            <p> Price: {property.price}$ </p>
-                            <p> Type: {property.type} </p>
-                            <p> Bathrooms: {property.bathrooms} </p>
+                            <p>Price: {property.price}$ </p>
+                            <p>Type: {property.type} </p>
+                            <p>Bathrooms: {property.bathrooms} </p>
                             <p>Bedrooms: {property.bedrooms}</p>
                             <p>Parking: {property.parking} </p>
                             { property.pool ? <p> Pool </p> : null}
+                            <p>Visits: {property.visitRequests.length} </p>
                         </div>
                         <img src={property.imageUrl} alt={property.address} />
                         <button onClick={() => handleDelete(property._id)}> Delete property </button>
