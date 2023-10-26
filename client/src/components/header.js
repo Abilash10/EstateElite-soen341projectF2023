@@ -35,6 +35,8 @@ function Header() {
                 <li>Team</li>
 
                 <li>Contact</li>
+                
+                { cookies.access_token ? <li> <Link to="/profile"> Profile </Link> </li> : null}
 
                 { !cookies.access_token ? 
                     (<li><Link to="/auth"> Login/Register </Link> </li>) : (<li onClick={logout} >  Logout </li> )}

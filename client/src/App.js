@@ -11,6 +11,7 @@ import styles from "./pages/repsonsive.module.css";
 import './App.css';
 import { AddProperty } from './pages/addProperty';
 import MyProperties from './pages/myproperties';
+import Profile  from './pages/profile';
 
 function App() {
   const [isBroker, setIsBroker] = useState(false);
@@ -31,6 +32,7 @@ function App() {
           path='/MyProperties'
           element = { <MyProperties />}
         > </Route>
+        <Route path='/profile' element={ <Profile /> } >  </Route>
       </Routes>
       <Footer />
     </Router>
