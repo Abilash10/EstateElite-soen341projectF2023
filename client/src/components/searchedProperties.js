@@ -31,7 +31,7 @@ const handleRequestVisit = async (event) => {
           <div key={property._id} className={styles.propertyCard} id={property._id}>
             <div className={styles.propertyVisuals}>
             <img className={styles.propertyImg} src={property.imageUrl} alt="Property Image" />
-            {userID != undefined && userID != property.userOwner ? <button className={styles.requestVisitBtn} onClick={handleRequestVisit}>Request Visit</button> : null}
+            {userID != undefined && userID != null && userID != property.userOwner ? <button className={styles.requestVisitBtn} onClick={handleRequestVisit}>Request Visit</button> : null}
             </div>
             <div className={styles.propertyInfo}>
                 <p><strong>Address:</strong> {property.address}</p>

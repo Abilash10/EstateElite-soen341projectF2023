@@ -78,7 +78,16 @@ const Login = (props) => {
                 username, 
                 password,
             });
-
+            
+            //Bad username
+            if(response.data.message === "badUsername"){
+                alert("Username does not exist!");
+                return;
+            }
+            if(response.data.message === "badPassword"){
+                alert("Incorrect password!");
+                return;
+            }
             setCookies('access_token', response.data.token);
             window.localStorage.setItem('userID', response.data.userID);
             window.localStorage.setItem('userType', response.data.userType);

@@ -61,20 +61,20 @@ router.post("/login",async (request,response)=>{
 
     const {username,password, userType}=request.body; //making API request for username and password
 
-    const user=await UserModel.findOne({username:username}) ; //checking is username is existant and if that's the case, we're assigning it a user object
+    const user=await UserModel.findOne({username:username}) ; //checking is username exists and if that's the case, we're assigning it a user object
 
     if(!user){
-
-        return response.json({message:"User is non-existent!"});
+        console.log("Attempted login user is non-existent!");
+        return response.json({message:"badUsername"});
 
     }
 
     //hashing the current password @ login and see if it matches with the hashed password in the database
-    const passwordValidation=await bcrypt.compare(password,user.password);
+    const passwordValidation = await bcrypt.compare(password,user.password);
 
     if(!passwordValidation){ //veryfing is the password is valid
-
-        return response.json({message:"The username or pasword is incorrect!"});
+        console.log("The login attempt pasword is incorrect!");
+        return response.json({message:"badPassword"});
     }
 
     const token=jwt.sign({id:user._id},"secret");   //creating an API authentication
@@ -110,5 +110,17 @@ router.post("/changePassword", verifyToken, async (req, res) => {
   }
 });
 
+//delete account
+router.delete("/deleteAccount", verifyToken, async (req, res) => {
+  console.log("delete account request for: " + req.user.id);
+  try {
+      const userId = req.user.id;
+      await UserModel.findByIdAndDelete(userId);
+      res.json({ message: "Account deleted successfully!" });
+      console.log("Account deleted successfully!");
+  } catch(err) {
+      res.status(500).json({ message: err.message });
+  }
+});
 
 export {router as userRouter};
