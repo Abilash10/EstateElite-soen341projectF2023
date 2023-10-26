@@ -55,6 +55,36 @@ router.get("/:propertyId", async (req, res) => {
   }
 });
 
+//Delete a property by ID
+router.delete("/:propertyId", async (req, res) => {
+  try {
+    const property = await PropertyModel.findByIdAndDelete(req.params.propertyId);
+
+    if (!property) {
+      return res.status(404).json({ message: "Property not found" });
+    }
+
+    res.status(200).json({ message: "Property deleted successfully", property });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Update a property visitrequest with the requesting userID by property ID
+router.post("/:propertyId/requestVisit", verifyToken, async (req, res) => {
+  console.log("Received visit request body:", req.body)
+  try {
+    const property = await PropertyModel.findById(req.params.propertyId);
+    property.visitRequests.push(req.body.userID);
+    const updatedProperty = await property.save();
+    res.status(200).json(updatedProperty);
+  } catch (err) {
+    console.error(err); // Log the error to the console
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+
 router.put("/",async(request,response)=>{   //post request done to the server, to create a property
 
     try{

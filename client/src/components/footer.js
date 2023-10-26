@@ -4,7 +4,7 @@ function Footer() {
 
     return (
         <div className={styles.footer} >
-  <p>privacy terms</p>
+  <p>Privacy Policy</p>
 </div>
     );
 };
