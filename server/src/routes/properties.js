@@ -55,6 +55,7 @@ router.get("/:propertyId", async (req, res) => {
   }
 });
 
+// endpoint to ensure we can delete properties
 router.delete("/:propertyId", async (req, res) => {
   try {
     const property = await PropertyModel.findByIdAndDelete(req.params.propertyId);
@@ -68,6 +69,21 @@ router.delete("/:propertyId", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+// API endpoint to edit the price of properties
+router.put('/:propertyId', async (req, res) => {
+  try {
+    const updatedProperty = await PropertyModel.findByIdAndUpdate(
+      req.params.propertyId,
+      { price: req.body.price },
+      { new: true }
+    );
+    res.status(200).json(updatedProperty);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 
 
 router.put("/",async(request,response)=>{   //post request done to the server, to create a property

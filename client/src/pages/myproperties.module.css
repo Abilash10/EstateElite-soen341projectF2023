@@ -5,3 +5,12 @@
     border-radius: 4px;
   }
   
+.editButton {
+    float: right;
+    font-size: 20px;
+}
+
+.deleteButton {
+    float: right;
+    font-size: 20px;
+}

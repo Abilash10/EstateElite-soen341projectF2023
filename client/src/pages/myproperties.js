@@ -11,6 +11,39 @@ function MyProperties() {
     const userID = useGetUserID();
     const [cookies, _] = useCookies(["access_token"]);
 
+    //functions to edit price of properties
+    const [editId, setEditId] = useState(null);
+    const [newPrice, setNewPrice] = useState(0);
+
+    const handleEdit = (id, currentPrice) => {
+        setEditId(id);
+        setNewPrice(currentPrice);
+    };
+
+    const handlePriceChange = (e) => {
+        setNewPrice(e.target.value);
+    };
+
+    const handleUpdate = async () => {
+        try {
+            await axios.put(
+                `http://localhost:3001/properties/${editId}`,
+                { price: newPrice }
+            );
+
+            setProperties((prev) => 
+            prev.map((property) => 
+            property._id === editId ? {...property, price: newPrice} : property )
+            );
+            setEditId(null);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+
+
+
     useEffect(() => {
 
         const fetchProperty = async () => {
@@ -48,7 +81,28 @@ function MyProperties() {
                             <h2> {property.address} </h2>
                         </div> 
                         <div className="info"> 
-                            <p> Price: {property.price}$ </p>
+                            <p> 
+                                Price: {" "} $
+                                {
+                                    editId === property._id ? (
+                                        <>
+                                            <input
+                                                type="number"
+                                                value={newPrice}
+                                                onChange={handlePriceChange}
+                                            />
+                                            <button onClick={handleUpdate}> Update </button>
+                                        </>
+                                    ) : (property.price)
+                                } 
+                                <button 
+                                    onClick={() => handleEdit(property._id, property.price)} 
+                                    className={styles.editButton}
+                                > 
+                                    Edit
+                                </button>
+
+                            </p>
                             <p> Type: {property.type} </p>
                             <p> Bathrooms: {property.bathrooms} </p>
                             <p>Bedrooms: {property.bedrooms}</p>
@@ -56,7 +110,15 @@ function MyProperties() {
                             { property.pool ? <p> Pool </p> : null}
                         </div>
                         <img src={property.imageUrl} alt={property.address} />
-                        <button onClick={() => handleDelete(property._id)}> Delete property </button>
+                        <br/>
+                        <button 
+                        onClick={() => handleDelete(property._id)}
+                        className={styles.deleteButton}
+                        > 
+                        Delete property 
+                        </button>
+                        <br/>
+                        <br/>
                     </li> : null
                 ))} 
             </ul>
