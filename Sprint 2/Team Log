@@ -1,9 +1,11 @@
 10/5/2023:
 Killian - Participated in the lab session idea brainstorming. I set up the client and server foundation files. Time spent: 1hr.
 Joerex  - Brainstormed ideas with teammates during the lab session. Watched videos that explained the MERN workspace and how to setup the back/front end. Time spent: 1hr
+Kateryna - Participated in brainstorming session during the lab. Worked on UI wireframes for the login page. Time spent: 1hr.
 10/10/2023:
 Killian - Delegated tasks as part of a group discussion. Time spent: 0.5hr.
 Joerex  - Delegated tasks between team members. Made sure everyone was on the same page Time spent: 0.5hr.
+Kateryna - Task delegation between team members for sprint 2. Time spent: 0.5hr. 
 10/23/2023:
 Killian - I made the home page look like our drawn design. Changed nav bar, styling and search bar. Held a meeting to delegate responsibilities before end of sprint. Time spent: 1.5hrs.
 Joerex  - Set up the database in MongoDB. Connected the backend with the database and completed some tests to see if the data gets saved in the database. Time spent: 1 hr. 
@@ -16,3 +18,6 @@ Killian - Added requesting to visit a property. Adding profile section where use
 Joerex - Created the properties route which allows to store the important information concerning a property. A broker would be able to enter a listing with specific properties such as address and amount of rooms. Functionality was added to get all the stored properties and display them to the user. Time spent: 2.5 hrs. 
 10/26/2023:
 Killian - Added user deletion. Fixed login and request to visit. Total time spent: 1h45.
+Kateryna - Created user stories for sprint 3. Tasks breakdown as well as their priority and risk were added in the team blog for sprint 3. Started created user acceptance tests. Time spent: 1.5hr.
+10/27/2023:
+Kateryna - Created 2 user acceptance flows for each user story of sprint 2. Time spent: 1hr. 
