@@ -62,7 +62,7 @@ jobs:
 
       # Wait for Server to Start
       - name: Wait for Server to Start
-        run: sleep 30
+        run: sleep 20
 
       # Start Client
       - name: Install Client Dependencies
@@ -77,7 +77,7 @@ jobs:
 
       # Wait for Client to Start
       - name: Wait for Client to Start
-        run: sleep 30
+        run: sleep 20
 
       # Run Selenium Tests
       - name: Set up Python
