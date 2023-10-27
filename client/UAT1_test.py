@@ -42,11 +42,14 @@ wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@type='submit']"))).c
 # Check for the error message if the username already exists
 try:
     error_message = wait.until(
-        EC.presence_of_element_located((By.ID, "registration completed! Now login."))
+        EC.presence_of_element_located(
+            (By.LINK_TEXT, "registration completed! Now login.")
+        )
     )
     print("Error message displayed:", error_message.text)
 except:
     print("No error message displayed.")
+
 
 # Close the WebDriver
 driver.quit()
