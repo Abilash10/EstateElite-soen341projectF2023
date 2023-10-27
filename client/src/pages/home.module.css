@@ -1,0 +1,59 @@
+.main {
+    background-image: url("../assets/HouseBackground.jpg");
+    background-size: cover;
+    background-repeat: repeat-y; /* Allow repetition vertically */
+    background-position: center;
+    background-attachment: fixed; /* Fix background position */
+    min-height: 100vh; /* Ensure it fills the viewport height by default */
+}
+
+.searchContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 40vh; 
+    width: 100%;
+}
+
+.searchBox {
+    width: 50%;
+    height: 50px;
+    border-radius: 20px;
+    border: 2px solid #000000;
+    padding: 10px;
+    font-size: 18px;
+    outline: none;
+    font-size: 24px;
+    margin: 0 auto;
+}
+
+.searchBox::placeholder {
+    font-size: 24px;
+    color: #ced4db;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end; /* push content to the right */
+    width: 50%;
+    margin: 5px auto 0 auto;
+    gap: 10px;
+}
+
+.advancedFiltersBtn, .searchBtn {
+    background-color: #000000;
+    color: #ffffff;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    font-size: 18px;
+    outline: none;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.advancedFiltersBtn:hover, .searchBtn:hover {
+    background-color: #cbb26a;
+    color: #000000;
+}
