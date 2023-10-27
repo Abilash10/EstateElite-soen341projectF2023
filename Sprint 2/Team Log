@@ -3,27 +3,34 @@ Killian - Participated in the lab session idea brainstorming. I set up the clien
 Joerex  - Brainstormed ideas with teammates during the lab session. Watched videos that explained the MERN workspace and how to setup the back/front end. Time spent: 1hr
 Kateryna - Participated in brainstorming session during the lab. Worked on UI wireframes for the login page. Time spent: 1hr.
 Nabih - Participated in the lab, helped brainstorm ideas. Started working on basic layout of our home page. Time spent: 1hr
+Abilash - Participated in the lab session idea brainstorming. Started creating the UI design using the Lucid App. Time Spent: 1 hr.
 10/10/2023:
 Killian - Delegated tasks as part of a group discussion. Time spent: 0.5hr.
 Joerex  - Delegated tasks between team members. Made sure everyone was on the same page Time spent: 0.5hr.
 Kateryna - Task delegation between team members for sprint 2. Time spent: 0.5hr. 
 Nabih - Participated in our short meeting where we delegated tasks and set up a timeline for the tasks. Time spen: 0.5 hr.
+Abilash - Broke down the tasks and delegated tasks amongst the team members. Time spent: 0.5 hr
 10/23/2023:
 Killian - I made the home page look like our drawn design. Changed nav bar, styling and search bar. Held a meeting to delegate responsibilities before end of sprint. Time spent: 1.5hrs.
 Joerex  - Set up the database in MongoDB. Connected the backend with the database and completed some tests to see if the data gets saved in the database. Time spent: 1 hr. 
 Nabih - I set up a basic Home page for our app, with a header, routes, navbar, and footer. Which was later updated and modified by my teeammate. Added also the Login page on the front end, with forms for registering and logging in. I also attempted to make the app web responsive. Time spent: 2 hrs.
+Abilash - I worked on the UI design and made the logo, the home page and the login page design. Started creating the code for the front end where the broker can add a property in their property list. Time spent: 2 hours
 10/24/2023:
 Killian - Worked alongside teammates. All features accomplished: connect front-end authentication to back-end. Added user types. Brokers ability to create properties. Time spent: 4hrs.
 Joerex  -  Worked on the back-end portion of the website. Created the user route which allows the user to login/register. Added functionalities that prevent errors while the user performs logging in and registering activities. In addition, make sure to hash the password. Time spent: 3 hrs
-Nabih - Worked with myy teammates in a coding session. We connected the login and register functions to the back-end. Implemented different user types. And added the logout function. Time spent: 4 hrs
+Nabih - Worked with myy teammates in a coding session. We connected the login and register functions to the back-end. Implemented different user types. And added the logout function. Time spent: 4 hours
+Abilash - Joined a coding session with Joerex, Killian, Nabih. Worked and 80% completed the add property function. Asked questions to teammates to clear doubts. Finalized logo design with teammates. Time spent 4 hrs
 10/25/2023:
 Killian - Added searching for properties feature. Time spent: 2hrs.
 Killian - Added requesting to visit a property. Adding profile section where user can change password. Total time spent: 3hrs.
 Joerex - Created the properties route which allows to store the important information concerning a property. A broker would be able to enter a listing with specific properties such as address and amount of rooms. Functionality was added to get all the stored properties and display them to the user. Time spent: 2.5 hrs. 
 Nabih - Set up the "my Properties" page that would appear for broker user type. And made sure that the broker will only see the properties he added on there. Time spent: 2hrs.
+Abilash - Finalized the add property function and merged code and made sure it worked efficiently. Time Spent: 2.5 hours
 10/26/2023:
 Killian - Added user deletion. Fixed login and request to visit. Total time spent: 1h45.
 Kateryna - Created user stories for sprint 3. Tasks breakdown as well as their priority and risk were added in the team blog for sprint 3. Started created user acceptance tests. Time spent: 1.5hr.
 Nabih - Finalized the "My Properties" page by adding a delete button that would delete the property from the database, and as well an update button, that allow the broker to update its price. Time spent: 2 hrs.
+Abilash - Presented demo to TA and discussed as a team what to do for sprint 3 and what tasks to complete for sprint 2 submission. Time spent: 1.5 hrs
 10/27/2023:
 Kateryna - Created 2 user acceptance flows for each user story of sprint 2. Time spent: 1hr. 
+Abilash - Created all the meeting minutes for sprint 2. Time Spent: 1 hour
