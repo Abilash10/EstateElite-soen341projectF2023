@@ -93,4 +93,4 @@ jobs:
       - name: Run Selenium Test
         run: |
           cd client
-          python3 selenium_test.py
+          python3 UAT1_test.py
