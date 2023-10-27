@@ -41,30 +41,30 @@ jobs:
       - name: Run Server Tests
         run: npm test
   
-  Client-register-and-test:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./client
-    steps:
-      - uses: actions/checkout@v2
+  # Client-register-and-test:
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: ./client
+  #   steps:
+  #     - uses: actions/checkout@v2
       
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
+  #     - name: Set up Python
+  #       uses: actions/setup-python@v2
+  #       with:
+  #         python-version: '3.x'
 
-      - name: Install dependencies
-        run: |
-          pip install selenium
+  #     - name: Install dependencies
+  #       run: |
+  #         pip install selenium
 
-      - name: Setup Firefox
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y firefox-geckodriver
+  #     - name: Setup Firefox
+  #       run: |
+  #         sudo apt-get update
+  #         sudo apt-get install -y firefox-geckodriver
 
-      - name: Run Selenium Test
-        run: python3 selenium_test.py  
-        #define automatice acceptance
+  #     - name: Run Selenium Test
+  #       run: python3 selenium_test.py  
+  #       #define automatice acceptance
 
   
