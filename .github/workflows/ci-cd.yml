@@ -1,15 +1,112 @@
 name: CI/CD Pipeline
-
+#---------full implementation will be available upon merging aproved from test branch -------------#
 on:
   push:
     branches:
       - main
+      - test
+  pull_request:
+    branches:
+      - test
+      - main
 
 jobs:
-  display-push-info:
+  display-info:
     runs-on: ubuntu-latest
     steps:
       - name: Display Push Info
         run: |
           echo "Commit Message: ${{ github.event.head_commit.message }}"
           echo "Pusher Name: ${{ github.actor }}"
+  # client-build-and-test:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       node-version: [14.x, 20.9.0]
+  #   defaults:
+  #     run:
+  #       working-directory: ./client
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Install Node.js
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #     - name: Install Client Dependencies
+  #       run: npm install
+  #     - name: Run Client Tests
+  #       run: npm test
+
+  server-build-and-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./server
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install Server Dependencies
+        run: npm install
+      - name: Run Server Tests
+        run: npm test
+  
+  Client-register-and-login-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # Start Server
+      - name: Install Server Dependencies
+        run: |
+          cd server
+          npm install
+      - name: Start Server
+        run: |
+          cd server/src
+          node index.js &
+        continue-on-error: true
+
+      # Wait for Server to Start
+      - name: Wait for Server to Start
+        run: sleep 20
+
+      # Start Client
+      - name: Install Client Dependencies
+        run: |
+          cd client
+          npm install
+      - name: Start Client
+        run: |
+          cd client
+          npm start &
+        continue-on-error: true
+
+      # Wait for Client to Start
+      - name: Wait for Client to Start
+        run: sleep 20
+
+      # Run Selenium Tests
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install Selenium dependencies
+        run: pip install selenium
+      - name: Setup Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+      # - name: Register user Test
+      #   run: |
+      #     cd client
+      #     python3 UAT1_test.py
+
+      # - name: Login user Test
+      #   run: |
+      #     cd client
+      #     python3 UAT2_test.py
+
+      #---------full implementation will be available upon merging aproved from test branch -------------#
