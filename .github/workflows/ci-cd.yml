@@ -95,7 +95,7 @@ jobs:
           python-version: '3.x'
       - name: Install Selenium dependencies
         run: pip install selenium
-      - name: Setup Chrome
+      - name: Setup Chrome and stop before runing selenuim
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
