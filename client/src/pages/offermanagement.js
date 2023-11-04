@@ -2,31 +2,28 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import {useGetUserID} from '../hooks/useGetUserID';
-import styles from './myoffers.module.css';
 
-function MyOffers() {
+
+function OfferManagement() {
 
     // state hook to fetch offers and properties
     const [offers, setOffers] = useState([]);
     const [properties, setProperties] = useState([]);
 
     const [propertiesID, setPropertiesID] = useState([]);
-
     // gettong the userID 
     const userID = useGetUserID();
     const [cookies, _] = useCookies(["access_token"]);
 
-   
-     // fetching offers in an array
     useEffect(() => {
 
         const fetchOffer = async () => {
             try {
                 const response = await axios.get("http://localhost:3001/offers");
                 
-                // filtering for offers made by the current user
+                // filtering for offers to properties of current Broker
                 const filteredOffers = response.data.filter(offer => 
-                    offer.offerCreator === userID );
+                    offer.propertyBroker === userID );
                 
                 
                 setOffers(filteredOffers);
@@ -43,7 +40,6 @@ function MyOffers() {
 
     }, []);
 
-      // fetching properties in an array
     useEffect(() => {
 
         const fetchProperty = async () => {
@@ -72,47 +68,50 @@ function MyOffers() {
         };
         fetchProperty();
     }, [propertiesID]);
-
-
-
-
     
+    const handleAccept = async () => {
+        try {
+            await axios.put(
+                `http://localhost:3001/offers`, {status: "accepted"}
+            );
 
+            setOffers((prev) => 
+            prev.map((offer) => //temp
+            offer._id === null ? {...offer, amount: 'accepted'} : null )
+            );
+
+        } catch (err) {
+            console.error(err)
+        }
+    }
 
     return (
-        <div> 
-            <h1> My offers </h1>
-            <ul className={styles.borderedLi}  > 
-             { offers.map((offer) =>  
+        <div>
+            <h1> Offers </h1>
+            <ul> 
+                { offers.map((offer) => 
+                <li key={offer._id}> 
+
+                    { properties.map((property) => 
+                    offer.property == property._id ? 
+                    <div> 
+                        <p>Property: {property.address}</p>
+                        <p> Offer: $ {offer.amount} </p>
+
+                        <button>Accept </button>
+                        <button> Rejected </button>
+                    </div>
+
+                    : null
+                    )}
+
+                </li> 
             
-            <li key={offer._id}> 
-               
-                { properties.map((property) => 
-                
-                offer.property == property._id ? //IMPORTANT: small bug when a client makes multiple offers to the same property a bugg occurs where it duplicates images
-                <div> 
-
-                    <h2>Address : {property.address} </h2>
-
-                    <p> Offer: {offer.amount} </p>
-
-                    <p style={{fontWeight:"bold"}}>  Status: {offer.status} </p>
-
-
-                    <img src={property.imageUrl} alt={property.address} />
-
-                     </div>  : null
-                 )}
-                
-            </li>
-
-             ) }
+                )}
             </ul>
 
         </div>
-
     );
-
 }
 
-export default MyOffers;
+ export default  OfferManagement;
