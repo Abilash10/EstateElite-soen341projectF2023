@@ -12,6 +12,7 @@ import './App.css';
 import { AddProperty } from './pages/addProperty';
 import MyProperties from './pages/myproperties';
 import Profile  from './pages/profile';
+import MyOffers from './pages/myoffers';
 
 function App() {
   const [isBroker, setIsBroker] = useState(false);
@@ -28,6 +29,12 @@ function App() {
                       setIsBroker={setIsBroker} 
                       />} >  </Route>
         <Route path='/addProperty' element={ <AddProperty /> } >  </Route>
+
+        <Route
+          path='/MyOffers'
+          element= {<MyOffers />}
+          >
+           </Route>
         <Route 
           path='/MyProperties'
           element = { <MyProperties />}

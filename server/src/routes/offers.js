@@ -24,4 +24,14 @@ router.post("/", async (req, res) => {
   }
 });
 
+// GET all offers
+router.get('/', async (req, res) => {
+  try {
+    const offers = await OfferModel.find();
+    res.json(offers);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 export{router as offersRouter}; 
