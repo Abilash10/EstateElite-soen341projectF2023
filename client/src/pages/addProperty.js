@@ -3,6 +3,8 @@ import axios from "axios";
 import { useGetUserID } from "../hooks/useGetUserID";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import styles from './addProperty.module.css';
+
 
 export const AddProperty = () => {
   const userID = useGetUserID();
@@ -52,7 +54,7 @@ export const AddProperty = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <div>
           <label htmlFor="address">Address: </label>
           <input type="text" id="address" name="address" value={property.address} onChange={handleChange} required />

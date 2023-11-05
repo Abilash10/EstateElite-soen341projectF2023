@@ -25,7 +25,8 @@ function Header() {
 
                 { userType == 'broker' ? <li> <Link to="/MyProperties"> My Properties </Link></li> : null }
 
-                <li>Team</li>
+                { userType == 'buyer' ? <li> <Link to="/BrokerList"> Broker List </Link></li> : null }
+
 
                 <li>Contact</li>
                 
