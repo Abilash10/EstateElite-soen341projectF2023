@@ -1,17 +1,19 @@
-
-
+import React, { useState } from 'react';
+import SearchedBrokers from "../components/searchedBrokers.js";
+import axios from "axios";
+import styles from "./home.module.css";
 
 
 
 function BrokerList() {
 
-    const [properties, setProperties] = useState([]);
+    const [brokers, setBrokers] = useState([]);
     const [searchValue, setSearchValue] = useState('');
   
     const handleSearch = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/properties/search/${searchValue}`);
-        setProperties(response.data);
+        const response = await axios.get(`http://localhost:3001/broker/search/${searchValue}`);
+        setBrokers(response.data);
       } catch (err) {
         console.error(err);
       }
@@ -23,19 +25,19 @@ function BrokerList() {
               <input 
               className={styles.searchBox} 
               type="text" 
-              placeholder="Search by location or address..." 
-              name="searchProperties" 
+              placeholder="Search by broker's surname or first name..." 
+              name="searchBrokers" 
               value={searchValue}
               onChange={e => setSearchValue(e.target.value)} 
               />
               <div className={styles.buttonContainer}>
-                  <button className={styles.advancedFiltersBtn} type="submit">Advanced Filters</button>
+                  {/* <button className={styles.advancedFiltersBtn} type="submit">Advanced Filters</button> */}
                   <button className={styles.searchBtn} type="submit" onClick={handleSearch}>Search</button>
               </div>
           </div>
-          <SearchedProperties properties={properties} />
+          <SearchedBrokers brokers={brokers} />
       </div>
   );
-  }
+}
   
-  export default BrokerList;
+export default BrokerList;

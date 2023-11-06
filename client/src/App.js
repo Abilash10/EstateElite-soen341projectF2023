@@ -12,6 +12,7 @@ import './App.css';
 import { AddProperty } from './pages/addProperty';
 import MyProperties from './pages/myproperties';
 import Profile  from './pages/profile';
+import BrokerList from './pages/BrokerList';
 
 function App() {
   const [isBroker, setIsBroker] = useState(false);
@@ -21,6 +22,7 @@ function App() {
       <Header />
       <Routes> 
         <Route path='/' element={ <Home />} >  </Route>
+        <Route path='/BrokerList' element={ <BrokerList /> } > </Route>
         <Route 
           path='/Auth'
           element= {<Auth 
