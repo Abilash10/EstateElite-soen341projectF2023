@@ -4,6 +4,7 @@ import mongoose from 'mongoose'; //allows communication with databases
 import {userRouter} from './routes/users.js'
 import {propertiesRouter} from './routes/properties.js';
 import {offersRouter} from './routes/offers.js';
+import { brokerRouter } from './routes/broker.js';
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(cors());    //solve API issues
 app.use("/auth",userRouter);
 app.use("/properties",propertiesRouter);
 app.use("/offers",offersRouter);
+app.use("/broker",brokerRouter);
 
 //Don't put password directly in here, we will secure using github secrets
 mongoose.connect(   //connecting our database to the code

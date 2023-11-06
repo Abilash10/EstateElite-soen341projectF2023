@@ -3,13 +3,14 @@ import mongoose from "mongoose";
 
 //creating the structure of the database for a broker. Broker must enter all these informations
 const BrokerSchematics = new mongoose.Schema({
-    Surname: { type: String, required: true },
-    Name: { type: Number, required: true },
-    Email: { type: String, required: true },
-    PhoneNumber:{type:String,required:true},
-    CompanyName: { type: Number, required: true },
-    OfficeAddress: { type: Number, required: true },
-    YearsOfExperience:{type: String, required: true}
+    surname: { type: String, required: true },
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+    phoneNumber:{type:String,required:true},
+    companyName: { type: String, required: true },
+    officeAddress: { type: String, required: true },
+    yearsOfExperience:{type: Number, required: true},
+    userOwner: { type: mongoose.Schema.Types.ObjectId, ref: "users", required: true }
 });
 
 

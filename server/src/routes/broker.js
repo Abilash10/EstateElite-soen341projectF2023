@@ -1,6 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import { BrokerModel } from "../models/Broker.js";
+import { verifyToken } from "./users.js";
+
 
 // a router allows you to define specific actions for different URL paths.
 // basically manages and defines routes for web applications
@@ -8,6 +10,38 @@ import { BrokerModel } from "../models/Broker.js";
 
 const router=express.Router(); //creating an instance of a Express Router. 
 
+
+router.get("/", async (req, res) => {
+  try {
+    const broker = await BrokerModel.find({});
+    res.status(200).json(broker);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+router.post("/", verifyToken, async (req, res) => {
+  console.log("Received request body:", req.body)
+  const broker = new BrokerModel({
+    ...req.body,  // Spread the request body to populate fields (address, price, etc.)
+    _id: new mongoose.Types.ObjectId(),
+  });
+
+  console.log("Succesfully modelled");
+
+  try {
+    const createdBroker = await broker.save();
+    res.status(201).json({ createdBroker });
+    console.log('Saved request body:', req.body);
+  } catch (err) {
+    res.status(500).json(err);
+    console.error('Error saving broker:', err);
+  }
+});
+
+
+/*
 router.get("/search/:Name", async (req, res) => {
     console.log("Search request received for Broker Name:", req.params.Name);
     try {
@@ -33,14 +67,6 @@ router.get("/search/:Name", async (req, res) => {
 
 });
 
-
-  //router.post("/broker,",async(request,response)=>
-
-
-
-
-
-
-
+*/
 
 export {router as brokerRouter};    //exporting the router object to index.js file
