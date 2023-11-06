@@ -1,16 +1,29 @@
 import React, { useState } from 'react';
 import SearchedBrokers from "../components/searchedBrokers.js";
 import axios from "axios";
+<<<<<<< HEAD
 
 
 function brokerList() {
 
+=======
+import styles from "./home.module.css";
+
+
+
+function BrokerList() {
+
+>>>>>>> 19fc788247186cdb0abaf1e0359b3c515a5d6153
     const [brokers, setBrokers] = useState([]);
     const [searchValue, setSearchValue] = useState('');
 
     const handleSearch = async () => {
       try {
+<<<<<<< HEAD
         const response = await axios.get(`http://localhost:3001/properties/search/${searchValue}`);
+=======
+        const response = await axios.get(`http://localhost:3001/broker/search/${searchValue}`);
+>>>>>>> 19fc788247186cdb0abaf1e0359b3c515a5d6153
         setBrokers(response.data);
       } catch (err) {
         console.error(err);
@@ -36,6 +49,12 @@ function brokerList() {
           <SearchedBrokers brokers={brokers} />
       </div>
   );
+<<<<<<< HEAD
   }
 
 export default brokerList;
+=======
+}
+  
+export default BrokerList;
+>>>>>>> 19fc788247186cdb0abaf1e0359b3c515a5d6153
