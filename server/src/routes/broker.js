@@ -30,8 +30,12 @@ router.post("/", verifyToken, async (req, res) => {
 
   console.log("Succesfully modelled");
 
+  const brokerId=req.user.id;
+  let tempBroker=await BrokerModel.findById(brokerId);
+
   try {
-    const createdBroker = await broker.save();
+    tempBroker=broker;
+    const createdBroker = await tempBroker.save();
     res.status(201).json({ createdBroker });
     console.log('Saved request body:', req.body);
   } catch (err) {
@@ -41,32 +45,18 @@ router.post("/", verifyToken, async (req, res) => {
 });
 
 
-/*
+
 router.get("/search/:Name", async (req, res) => {
     console.log("Search request received for Broker Name:", req.params.Name);
     try {
       const NameRegex = new RegExp(req.params.Name, 'i'); // Create a case-insensitive regex
-      const broker = await BrokerModel.find({ Name:NameRegex });//searches in the database
+      const broker = await BrokerModel.find({ name:NameRegex });//searches in the database
       res.status(200).json(broker);//returns the Broker if it's successful
     } catch (err) {
       res.status(500).json(err);//returns an error
+      console.error('Error saying broker:',err);
     }
   });
 
-
-  router.post("/editProfile",async(request,response)=>{
-
-    const {Surname,Name,Email,PhoneNumber,CompanyName,OfficeAddress,YearsOfExperience}=request.body; //making API request for username and password
-
-    const BrokerInfo=new BrokerModel(Surname,Name,Email,PhoneNumber,CompanyName,OfficeAddress,YearsOfExperience);
-
-    await BrokerInfo.save();   //saving user info in database
-
-    response.json({message:"Broker information has been completed succesfully"});
-
-
-});
-
-*/
 
 export {router as brokerRouter};    //exporting the router object to index.js file

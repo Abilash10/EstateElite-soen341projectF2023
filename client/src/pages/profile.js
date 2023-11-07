@@ -142,7 +142,8 @@ function Profile() {
                  <button onClick={changePassword}> Submit </button>
           </h3>
           <button onClick={deleteAccount}>Delete Account</button>
-          <button onClick={() => setEditing(true)}>Edit Account</button>
+          {localStorage.getItem("userType")=="broker"?
+            <button onClick={() => setEditing(true)}>Edit Account</button>:null} 
         </div>
       )}
     </div>
