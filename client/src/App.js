@@ -12,7 +12,7 @@ import './App.css';
 import { AddProperty } from './pages/addProperty';
 import MyProperties from './pages/myproperties';
 import Profile  from './pages/profile';
-import BrokerList from './pages/BrokerList';
+import BrokerList from './pages/brokerList';
 
 function App() {
   const [isBroker, setIsBroker] = useState(false);
