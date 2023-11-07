@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import {useGetUserID} from '../hooks/useGetUserID';
+import { getToken } from "../hooks/getToken";
 
 
 function OfferManagement() {
@@ -43,7 +44,8 @@ function OfferManagement() {
     useEffect(() => {
 
         const fetchProperty = async () => {
-         
+           
+
             if (propertiesID.length == 0 ) {
                 return;
             }
@@ -69,19 +71,65 @@ function OfferManagement() {
         fetchProperty();
     }, [propertiesID]);
     
-    const handleAccept = async () => {
+    const handleAccept = async (offerId) => {
+        const token = getToken();
         try {
             await axios.put(
-                `http://localhost:3001/offers`, {status: "accepted"}
+                `http://localhost:3001/offers/${offerId}`, {status: "Accepted"}, {
+                    headers: {
+                        authorization: cookies.access_token
+                    }
+                }
             );
 
             setOffers((prev) => 
             prev.map((offer) => //temp
-            offer._id === null ? {...offer, amount: 'accepted'} : null )
+            offerId === offer._id ?
+             {...offer, status: 'Accepted'} : offer )
             );
 
         } catch (err) {
             console.error(err)
+        }
+    };
+
+    const handleReject = async (offerId) => {
+        try {
+            await axios.put(
+                `http://localhost:3001/offers/${offerId}`, 
+                {status: "Rejected"}, 
+                {headers: {
+                    authorization: cookies.access_token
+                }}
+            );
+            setOffers((prev) => 
+            prev.map((offer) => 
+            offer._id === offerId ? 
+            {...offer, status: 'Rejected'} : offer ));
+
+
+        } catch(err) {
+            console.error(err);
+        }
+
+    };
+
+    const handleUndo =  async (offerId) => {
+        try {
+            await axios.put(
+                `http://localhost:3001/offers/${offerId}`, 
+                {status: 'pending'},
+                {headers: {
+                    authorization : cookies.access_token
+                }}
+            );
+            setOffers((prev) => 
+            prev.map((offer) => 
+            offer._id === offerId ? 
+            {...offer, status: 'pending'} : offer ));
+
+        } catch(err) {
+            console.error(err);
         }
     }
 
@@ -90,24 +138,37 @@ function OfferManagement() {
             <h1> Offers </h1>
             <ul> 
                 { offers.map((offer) => 
-                <li key={offer._id}> 
 
-                    { properties.map((property) => 
-                    offer.property == property._id ? 
-                    <div> 
-                        <p>Property: {property.address}</p>
-                        <p> Offer: $ {offer.amount} </p>
+                {const property = properties.find(p => p._id === offer.property);
+                
+                    return (
+                        <li key={offer._id}>
+                            {property && (
+                                <div> 
+                                    <p>Property: {property.address}</p>
+                                    <p> Offer: $ {offer.amount} </p>
+                                    {offer.status == 'pending' ? 
+                                            (<>
+                                                <button
+                                                    onClick={() => handleAccept(offer._id)}
+                                                >Accept </button>
+                                                <button
+                                                    onClick={() => handleReject(offer._id)}
+                                                > Rejected </button>
+                                            </>)
+                                             : (
+                                                <> 
+                                                <p>Status: {offer.status} </p>
+                                                <a href="#" onClick={() => handleUndo(offer._id)}> Have you changed your mind about the offer ? Click here to undo </a>
+                                                </>
+                                             )
+                                    }
+                                </div>
+                            ) }
+                        </li>
+                    );
 
-                        <button>Accept </button>
-                        <button> Rejected </button>
-                    </div>
-
-                    : null
-                    )}
-
-                </li> 
-            
-                )}
+                })}
             </ul>
 
         </div>

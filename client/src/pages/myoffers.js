@@ -41,7 +41,7 @@ function MyOffers() {
         };
         fetchOffer();
 
-    }, []);
+    }, [offers]);
 
       // fetching properties in an array
     useEffect(() => {
@@ -73,6 +73,24 @@ function MyOffers() {
         fetchProperty();
     }, [propertiesID]);
 
+    const handleDelete = async (offerId) => {
+
+        try {
+            await axios.delete(
+                `http://localhost:3001/offers/${offerId}`, 
+                {headers: {
+                    authorization : cookies.access_token
+                }}
+            );
+            setOffers(offers.filter((offer) => offer._id != offerId));
+            alert("Property Deleted");
+
+
+        } catch(err) {
+            console.error(err);
+        }
+    };
+
 
 
 
@@ -100,6 +118,8 @@ function MyOffers() {
 
 
                     <img src={property.imageUrl} alt={property.address} />
+
+                    <button onClick={() => handleDelete(offer._id)}>Delete </button>
 
                      </div>  : null
                  )}
