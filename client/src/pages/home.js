@@ -1,5 +1,4 @@
 import styles from "./home.module.css";
-import sP from "../components/searchedProperties.js";
 import React, { useState } from 'react';
 import SearchedProperties from "../components/searchedProperties.js";
 import axios from "axios";
@@ -18,6 +17,12 @@ function Home() {
     }
   }
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  }
+
   return (
     <div className={styles.main}>
         <div className={styles.searchContainer}>
@@ -27,10 +32,10 @@ function Home() {
             placeholder="Search by location or address..." 
             name="searchProperties" 
             value={searchValue}
-            onChange={e => setSearchValue(e.target.value)} 
+            onChange={e => setSearchValue(e.target.value)}
+            onKeyPress={handleKeyPress} 
             />
             <div className={styles.buttonContainer}>
-                <button className={styles.advancedFiltersBtn} type="submit">Advanced Filters</button>
                 <button className={styles.searchBtn} type="submit" onClick={handleSearch}>Search</button>
             </div>
         </div>

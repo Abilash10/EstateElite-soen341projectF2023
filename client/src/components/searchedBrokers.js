@@ -23,7 +23,7 @@ return (
           </div>
           <div className={styles.propertyInfo}>
               <p><strong>Surname:</strong> {brokers.surname}</p>
-              <p><strong>Name:</strong> ${brokers.name}</p>
+              <p><strong>Name:</strong> {brokers.name}</p>
               <p><strong>E-mail:</strong> {brokers.email}</p>
               <p><strong>Phone Number:</strong> {brokers.phoneNumber}</p>
               <p><strong>Company Name:</strong> {brokers.companyName}</p>

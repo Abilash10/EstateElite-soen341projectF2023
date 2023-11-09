@@ -15,7 +15,9 @@ function Header() {
     
     return (
         <div className={styles.header}>
-            <img className={styles.logo} src={logoImg} alt="logo" />
+            <Link to="/"> {/* Wrap the logo with Link */}
+                <img className={styles.logo} src={logoImg} alt="logo" />
+            </Link>
             <div className={styles.menu}>
             <ul>
                 <li> <Link to="/"> Home </Link> </li>
