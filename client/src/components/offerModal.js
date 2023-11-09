@@ -17,7 +17,7 @@ function OfferModal({ propertyId, brokerId, show, close }) {
         console.log('userID:', window.localStorage.getItem('userID'));
         //send post request to server
         try {
-            const response = await axios.post(`http://localhost:3001/offers`, { amount: offerAmt, property: propertyId, offerCreator: window.localStorage.getItem('userID') });
+            const response = await axios.post(`http://localhost:3001/offers`, { amount: offerAmt, property: propertyId,  propertyBroker: brokerId, offerCreator: window.localStorage.getItem('userID') });
             console.log(response);
             alert("Offer Submitted!");
         }

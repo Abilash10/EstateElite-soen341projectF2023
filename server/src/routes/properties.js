@@ -100,40 +100,38 @@ router.put('/:propertyId', async (req, res) => {
 
 
 
-router.put("/",async(request,response)=>{   //post request done to the server, to create a property
+router.put("/", async (request, response) => {   //post request done to the server, to create a property
 
-    try{
-        const property=await PropertyModel.findById(request.body.propertyID);
-        const user=await UserModel.findById(request.body.userID);
-        user.savedProperties.push(property);
-        await user.save();
-        response.json({savedProperties:user.savedProperties});
-        const receiveResponse=await property.save();
-        response.json(receiveResponse);
-    
-    }
-    
-    catch(err){
-    
-        response.json(err);
-    }
+  try {
+    const property = await PropertyModel.findById(request.body.propertyID);
+    const user = await UserModel.findById(request.body.userID);
+    user.savedProperties.push(property);
+    await user.save();
+    response.json({ savedProperties: user.savedProperties });
+    const receiveResponse = await property.save();
+    response.json(receiveResponse);
 
-});
+  }
 
+  catch (err) {
 
-router.get("/savedProperties/ids",async(request,response)=>{
-
-try
-{
-
-const user=await UserModel.findById(request.body.userID);
-response.json({savedProperties:user.savedProperties});
-}
-
-catch(err)
-{
     response.json(err);
-}
+  }
+
+});
+
+
+router.get("/savedProperties/ids", async (request, response) => {
+
+  try {
+
+    const user = await UserModel.findById(request.body.userID);
+    response.json({ savedProperties: user.savedProperties });
+  }
+
+  catch (err) {
+    response.json(err);
+  }
 
 });
 
@@ -141,4 +139,4 @@ catch(err)
 
 
 
-export{router as propertiesRouter};
+export { router as propertiesRouter };

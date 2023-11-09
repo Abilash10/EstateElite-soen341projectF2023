@@ -74,7 +74,7 @@ function MyProperties() {
 
         <div>
             <h1>  My properties  </h1>
-            <ul className={styles.borderedLi } style={{listStyleType: 'none'}} > 
+            <ul className={styles.borderedLi } style={{listStyleType:'none'}} > 
                 {properties.map((property) => ( property.userOwner == userID ? 
                     <li key={property._id}>
                         <div> 

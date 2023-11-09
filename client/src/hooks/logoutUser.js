@@ -10,6 +10,7 @@ const useLogout = () => {
         setCookies("access_token", "");
         window.localStorage.removeItem("userID");
         window.localStorage.removeItem("userType");
+        window.localStorage.removeItem("token");
         navigate("/auth");
     };
 
