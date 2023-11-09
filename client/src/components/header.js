@@ -25,6 +25,9 @@ function Header() {
 
                 { userType == 'broker' ? <li> <Link to="/MyProperties"> My Properties </Link></li> : null }
 
+
+                { userType != 'broker' ? <li> <Link to="/BrokerList"> Broker List </Link></li> : null }
+
                 
                 { cookies.access_token ? 
                 
