@@ -8,7 +8,7 @@ Kate -
 
 11/05/2023: 
 Abilash - With Joerex, we both worked on our assigned tasks. I focused on the front end and styling for the broker list and editing the broker's profile. Created multiple functions and files for the front end and back end and connected the two together. Time spent: 6 hours
-Joerex - With Abilash, we worked on our delegated tasks. I focused on creating the back-end server that allows to retrieve/send the broker information to the database. A new collection was created in the database that will save broker profile. In addition, I focused on the implementation of the search broker functionality in the back-end that will retrieve the searched broker from the database. Time spent:6 hours 
+Joerex - With Abilash, we worked on our delegated tasks. I focused on creating the back-end server that allows to retrieve/send the broker information to the database. A new collection was created in the database that will save broker profile. In addition, I focused on the implementation of the search broker functionality in the back-end that will retrieve the searched broker from the database. Time spent:8 hours 
 
 11/06/2023:
 Abilash - There were some minor bugs in our code so along with Joerex and Killian, we fixed those bugs. Time spent: 1.5 hours
