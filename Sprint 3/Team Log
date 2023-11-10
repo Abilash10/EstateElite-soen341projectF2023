@@ -2,15 +2,17 @@
 Abilash - Along with Joerex, we worked on our assigned task which is to create a broker list for buyers and allow brokers to edit their profile. We first created the necessary files and worked on understanding the necessary logic behind each function. Time spent: 1hour 45 mins.
 Killian - 
 Joerex - Along with Abilash, we worked on creating a brokerlist for buyers and a page for a broker user to edit his profile information. Files were created in the server folder and the logic was discuss/impplemented for the back-end/front-end. Time spent: 1 hour 45 mins.
-Nabih - 
+Nabih - Along with Peno, we discussed possible aproaches for acceptance and refusals of offers. We started planning how we would do it, and we set out a timeline. Time spent: 1 hour 45 mins
 Peno - Along with Nabih and Joerex, We discuss on possible approach for offer acceptance and refusal .We also discuss the front-end/backend approach. Time spent 1 hour 45 mins. 
 Kate - Along with Kilian, we worked on our assigned task which is to create an option of submitting an offer for the listing. Time spent: 3.5 hours.
 
 11/03/2023: 
 Peno - Along with Nabih , We discuss our exact design for implementing the functionality and how to we will distribute the task load. Time spent: 2 hours.
+Nabih - Along with Peno, we discussed in detail how we would implement the functionalities. Also worked on the initial code of the "my offers" page. Time spent: 3 hours
 
 11/04/2023: 
 Peno - Work on the backend functionality to modify the status of an offer based. Time spent: 3 hours.
+Nabih - Coding session with Peno, I worked more on the "my offers" page, connected it to the backend. Made sure whenever a client makes an offer to to a property they will be able to see it withb its current status Also created a temporary offer management page with basic layout. Time spent: 3 hours
 
 11/05/2023: 
 Abilash - With Joerex, we both worked on our assigned tasks. I focused on the front end and styling for the broker list and editing the broker's profile. Created multiple functions and files for the front end and back end and connected the two together. Time spent: 6 hours
@@ -20,12 +22,13 @@ Joerex - With Abilash, we worked on our delegated tasks. I focused on creating t
 Abilash - There were some minor bugs in our code so along with Joerex and Killian, we fixed those bugs. Time spent: 1.5 hours
 Joerex - Along with Abilash and Killian, we fixed some bugs and logical errors. Time spent: 1.5 hours 
 Killian - 
+Nabih - Finally added the accept and reject offer to the offer management where brokers are able to accept or reject an offer made to their property. Also added an undo button, in case the broker made a decision by mistake. Time spent: 3 hours
 
 11/09/2023:
 Abilash - Presented the sprint 3 demo to the TA and professor. Discussed what we have left to do for our sprint 3 submission and what tasks we have to do for sprint 4. Time spent: 1hour 45 mins.
 Killian - 
 Joerex - The sprint 3 demo was presented during the lab session. Discussed about the tasks that are remaining from sprint 3 and what tasks were needed for sprint 4. Time spent: 1 hour 45 mins.
-Nabih - 
+Nabih - Presented our work for sprint 3 to the TA, which was mainly the offer management and dsiplay. Then discussed with my colleagues the tasks left to be done for sprint 4. Time spent: 1 hour 45 mins.
 Peno - Presented our implementation of the offer acceptance and refusal. Discuss possible user acceptance criteria. Time spent: 1 hour 45 mins.
 Kate - Presented the sprint 3 demo along with the team. Discussed the tasks of sprint 4. Worked on user stories for sprint 4 and UAE of sprint 3. Updated the product backlog with the informtation of sprint 4. Time spent: 3 hours.
 

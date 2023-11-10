@@ -1,0 +1,31 @@
+~ Meeting Minutes (2) ~
+
+Date: Fri 3rd November, 2023
+
+Time: 12:00 pm to 3:00 pm 
+
+Location: Online
+
+Present: Nabih El-helou, Penoelo Thibeaud
+
+Absent: Kilian Hedou, Kateryna Sizova, Abilash Sasitharan, Joerexpradeepan Thambaiah
+
+Agenda:
+
+    Work on frontend and backend to complete our assigned task 
+        - Discuss how we would do to retrieve the offers and display them
+        - Write a quick pseudo code to have an idea how to start
+        - Start working on the front-end
+        
+
+Minutes:
+
+    It was discussed that the offers would be displayed using the following logic: 
+        - first fetch the offers element from the database and save the property IDs of each offer in an array
+        - Then by itarting through the property IDs arrray, we fecth the corresponding property
+        - Then once, the property is fetched, we can gather its data and then display it
+
+    That logic was then implemented by Nabih on the front-end, with the assistance of Peno. 
+
+    Penoelo was assigned to start working on the back-end to create a get function that would retrieve the offer elements.
+    Nabih was assigned to finish the "my offer" page so it can be connected to the database on the next meeting.
