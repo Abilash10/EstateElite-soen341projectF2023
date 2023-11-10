@@ -37,9 +37,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install Client Dependencies
-        run: |
-          nvm install
-          npm install
+        run: npm install
       - name: Run Client Tests
         run: npm test
 
@@ -59,7 +57,7 @@ jobs:
       - name: Run Server Tests
         run: npm test
   
-  Client-register-and-login-test:
+  Scenario-testin:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
