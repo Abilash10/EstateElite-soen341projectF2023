@@ -2,7 +2,7 @@
 
 Date: Sat 4th November, 2023
 
-Time: 3:00 pm to 6:00 pm 
+Time: 12:30 pm to 3:00 pm 
 
 Location: Online
 
@@ -12,9 +12,10 @@ Absent: Kilian Hedou, Kateryna Sizova, Abilash Sasitharan, Joerexpradeepan Thamb
 
 Agenda:
 
-    Work on frontend and backend to complete our assigned task
-        - 
+    Work on frontend and backend to complete our assigned task (Acceptance and resfusal for offers)
+        - Finish function to modify offer status
+        - Implement it in the interface 
 
 Minutes:
 
-    [...]
+    Penoelo was assign to create a function on the back-end to change the status state of an offer to accepted or declined
