@@ -5,10 +5,13 @@ on:
     branches:
       - main
       - test
+      - Ktesting
   pull_request:
+    types: [opened, synchronize, reopened, closed]
     branches:
       - test
       - main
+      - Ktesting
 
 jobs:
   display-info:
@@ -18,24 +21,25 @@ jobs:
         run: |
           echo "Commit Message: ${{ github.event.head_commit.message }}"
           echo "Pusher Name: ${{ github.actor }}"
-  # client-build-and-test:
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       node-version: [14.x, 20.9.0]
-  #   defaults:
-  #     run:
-  #       working-directory: ./client
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Install Node.js
-  #       uses: actions/setup-node@v2
-  #       with:
-  #         node-version: ${{ matrix.node-version }}
-  #     - name: Install Client Dependencies
-  #       run: npm install
-  #     - name: Run Client Tests
-  #       run: npm test
+        
+  client-build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x, 20.9.0]
+    defaults:
+      run:
+        working-directory: ./client
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install Client Dependencies
+        run: npm install
+      - name: Run Client Tests
+        run: npm test
 
   server-build-and-test:
     runs-on: ubuntu-latest
