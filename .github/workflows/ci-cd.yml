@@ -37,7 +37,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install Client Dependencies
-        run: npm install
+        run: |
+          nvm install
+          npm install
       - name: Run Client Tests
         run: npm test
 
