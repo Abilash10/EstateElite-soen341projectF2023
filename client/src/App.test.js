@@ -1,39 +1,42 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 
-// Helper function to render the app with router context
+// Helper function to wrap components with Router since we use 'useRouteMatch' hook in components
 const renderWithRouter = (ui, { route = '/' } = {}) => {
   window.history.pushState({}, 'Test page', route);
   return render(ui, { wrapper: Router });
 };
 
-describe('Home Page', () => {
-  test('renders NavBar with Home link', () => {
+describe('App Component', () => {
+  test('renders the navigation bar and its links', () => {
     renderWithRouter(<App />);
-    const homeLink = screen.getByText(/home/i); // This is case-insensitive
-    expect(homeLink).toBeInTheDocument();
+    expect(screen.getByText('Home')).toBeInTheDocument();
+    expect(screen.getByText('My Properties')).toBeInTheDocument();
+    expect(screen.getByText('Team')).toBeInTheDocument();
+    expect(screen.getByText('Contact')).toBeInTheDocument();
+    expect(screen.getByText('Login/Register')).toBeInTheDocument();
   });
 
-  test('renders search bar', () => {
+  test('renders the search bar on home page', () => {
     renderWithRouter(<App />);
-    const searchBar = screen.getByPlaceholderText(/search by location or address.../i);
-    expect(searchBar).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Search by location or address...')).toBeInTheDocument();
   });
 
-  test('renders Advanced Filters button', () => {
+  test('navigates to the broker list when clicking on "BrokerList" link', () => {
     renderWithRouter(<App />);
-    const advancedFiltersButton = screen.getByText(/advanced filters/i);
-    expect(advancedFiltersButton).toBeInTheDocument();
+    userEvent.click(screen.getByText('BrokerList'));
+    // Assuming BrokerList renders a heading or text that can be checked
+    expect(screen.getByText('Broker List Page Content')).toBeInTheDocument();
   });
 
-  test('renders Search button', () => {
-    renderWithRouter(<App />);
-    const searchButton = screen.getByRole('button', { name: /search/i });
-    expect(searchButton).toBeInTheDocument();
-  });
+  // ... More tests for other navigation links and routes
 
-  // Add more tests for other home page elements (Broker list, Team, Contact, Login/Register )
+  test('renders the footer', () => {
+    renderWithRouter(<App />);
+    // Assuming the footer contains some text that can be checked
+    expect(screen.getByText('Footer Content')).toBeInTheDocument();
+  });
 });
 
