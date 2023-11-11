@@ -32,6 +32,11 @@ jobs:
         working-directory: ./client
     steps:
       - uses: actions/checkout@v2
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
@@ -48,6 +53,11 @@ jobs:
         working-directory: ./server
     steps:
       - uses: actions/checkout@v2
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+         path: '**/node_modules'
+         key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
@@ -71,7 +81,7 @@ jobs:
         run: |
           cd server/src
           node index.js &
-        continue-on-error: true
+        #continue-on-error: true--------------------
 
       # Wait for Server to Start
       - name: Wait for Server to Start
