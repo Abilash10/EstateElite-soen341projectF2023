@@ -2,19 +2,19 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.options import Options
 from selenium.common.exceptions import NoAlertPresentException
 import logging
 
 # Initialize logging
 logging.basicConfig(level=logging.INFO)
 
-# Run Chrome in headless mode for testing environment
-chrome_options = Options()
-chrome_options.add_argument("--headless")
+# Run Firefox in headless mode for testing environment
+firefox_options = Options()
+firefox_options.add_argument("--headless")
 
-# Initialize the WebDriver
-driver = webdriver.chrome(options=chrome_options)
+# Initialize the WebDriver to use Firefox
+driver = webdriver.Firefox(options=firefox_options)
 
 wait = WebDriverWait(driver, 10)
 
@@ -69,8 +69,10 @@ try:
 
 except NoAlertPresentException as e:
     logging.error(f"No alert present: {e}")
+    raise
 except Exception as e:
     logging.error(f"An error occurred: {e}")
+    raise
 
 finally:
     # Close the WebDriver

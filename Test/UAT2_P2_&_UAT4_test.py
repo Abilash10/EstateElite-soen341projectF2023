@@ -3,17 +3,18 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.firefox.options import Options
 import logging
 
 # Initialize logging
 logging.basicConfig(level=logging.INFO)
 
-# Run Chrome in headless mode for the testing environment
-# chrome_options = Options()
-# chrome_options.add_argument("--headless")
+# Run Firefox in headless mode for testing environment
+firefox_options = Options()
+firefox_options.add_argument("--headless")
 
-# Initialize the WebDriver
-driver = webdriver.Firefox()  # Chrome(options=chrome_options)
+# Initialize the WebDriver to use Firefox
+driver = webdriver.Firefox(options=firefox_options)
 
 wait = WebDriverWait(driver, 10)
 
@@ -58,10 +59,13 @@ try:
 
 except TimeoutException:
     logging.error("A timeout occurred waiting for the search bar to appear.")
+    raise
 except AssertionError as e:
     logging.error(f"Assertion error: {e}")
+    raise
 except Exception as e:
     logging.error(f"An error occurred: {e}")
+    raise
 
 finally:
     # Close the WebDriver
