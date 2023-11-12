@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import TimeoutException
 import logging
 
 # Initialize logging
@@ -14,7 +15,7 @@ chrome_options = Options()
 chrome_options.add_argument("--headless")
 
 # Initialize the WebDriver
-driver = webdriver.Chrome(options=chrome_options)
+driver = webdriver.chrome(options=chrome_options)
 
 wait = WebDriverWait(driver, 10)
 
@@ -23,43 +24,52 @@ try:
     driver.get("http://localhost:3000/")  # Replace with your sign-up page URL
     logging.info("Navigated to the homepage.")
 
-    # Find and click the Sign Up button
-    sign_up_button = wait.until(
-        EC.presence_of_element_located(
+    # Find and click the 'Login/Register' link
+    login_register_link = wait.until(
+        EC.element_to_be_clickable(
             (By.XPATH, "//a[normalize-space()='Login/Register']")
         )
     )
-    sign_up_button.click()
-    logging.info("Clicked the Sign Up button.")
+    login_register_link.click()
+    logging.info("Clicked the 'Login/Register' link.")
 
     # Wait for and click the "Don't have an account?" option
-    wait.until(EC.element_to_be_clickable((By.XPATH, "//a[@href='#']"))).click()
+    Dont_have_a_account = wait.until(
+        EC.element_to_be_clickable((By.XPATH, "//a[@href='#']"))
+    )
+    Dont_have_a_account.click()
     logging.info("Clicked 'Don't have an account?'")
 
     # Wait and fill in the username and password fields
     username_field = wait.until(EC.presence_of_element_located((By.ID, "username")))
     username_field.send_keys("new_username")
     logging.info("Filled in the username.")
-
     password_field = wait.until(EC.presence_of_element_located((By.ID, "password")))
     password_field.send_keys("new_password")
     logging.info("Filled in the password.")
 
-    # Wait and click the Sign Up button
-    wait.until(
-        EC.element_to_be_clickable((By.XPATH, "//button[@type='submit']"))
-    ).click()
-    logging.info("Clicked the final Sign Up button.")
-
-    # Validate that the account was successfully created
-    success_message = wait.until(
-        EC.presence_of_element_located(
-            (By.LINK_TEXT, "registration completed! Now login.")
-        )
+    # Submit the registration form
+    submit_registration_button = driver.find_element(
+        By.XPATH, "//button[@type='submit']"
     )
-    assert "registration completed! Now login." == success_message.text
-    logging.info("Account successfully created.")
+    submit_registration_button.click()
+    logging.info("Registration form submitted.")
 
+    # Wait for the alert to be present
+    WebDriverWait(driver, 10).until(EC.alert_is_present())
+
+    # Switch to the alert
+    alert = driver.switch_to.alert
+
+    # Validate the alert's text
+    assert "registration completed! Now login." in alert.text
+    logging.info("Alert shows the expected success message.")
+
+    # You can now accept the alert which is equivalent to clicking 'OK'
+    alert.accept()
+
+except NoAlertPresentException as e:
+    logging.error(f"No alert present: {e}")
 except Exception as e:
     logging.error(f"An error occurred: {e}")
 
