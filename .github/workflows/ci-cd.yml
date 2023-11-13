@@ -67,7 +67,7 @@ jobs:
       - name: Run Server Tests
         run: npm test
   
-  Scenario-testin:
+  Scenario-testin-Sprint-2:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -81,7 +81,6 @@ jobs:
         run: |
           cd server/src
           node index.js &
-        #continue-on-error: true--------------------
 
       # Wait for Server to Start
       - name: Wait for Server to Start
@@ -96,7 +95,7 @@ jobs:
         run: |
           cd client
           npm start &
-        continue-on-error: true
+        #continue-on-error: true----------
 
       # Wait for Client to Start
       - name: Wait for Client to Start
@@ -121,11 +120,68 @@ jobs:
           sudo chmod +x /usr/local/bin/geckodriver
 
       - name: Register user Test
-        run: |
-          cd Test
-          python3 UAT1_&_UAT3_test.py
+        run: python3 UAT1_UAT3_test.py
 
       - name: Login user Test
         run: |
           python3 Test/UAT2_P1_test.py
-          python3 Test/UAT2_P2_&_UAT4_test.py
+          python3 Test/UAT2_P2_UAT4_test.py
+      
+      - name: Check header consistansy and header menu
+        run: python3 Test/UAT5_UAT6_test.py
+
+      - name: Check Basic search and visit request
+        run: python3 Test/UAT7_UAT8_test.py
+
+  Scenario-testin-Sprint-3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      # Start Server
+      - name: Install Server Dependencies
+        run: |
+          cd server
+          npm install
+      - name: Start Server
+        run: |
+          cd server/src
+          node index.js &
+      #continue-on-error: true--------------------
+      
+      # Wait for Server to Start
+      - name: Wait for Server to Start
+        run: sleep 20
+      
+      # Start Client
+      - name: Install Client Dependencies
+        run: |
+          cd client
+          npm install
+      - name: Start Client
+        run: |
+          cd client
+          npm start &
+        #continue-on-error: true-----------
+      
+      # Wait for Client to Start
+      - name: Wait for Client to Start
+        run: sleep 20
+      
+      # Run Selenium Tests
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install Selenium dependencies
+        run: pip install selenium
+      
+      - name: Setup Firefox
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y firefox
+          GECKODRIVER_VERSION=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest | grep tag_name | cut -d '"' -f 4)
+          wget https://github.com/mozilla/geckodriver/releases/download/$GECKODRIVER_VERSION/geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
+          tar -xzf geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
+          sudo mv geckodriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/geckodriver

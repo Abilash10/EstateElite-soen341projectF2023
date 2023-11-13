@@ -4,4 +4,6 @@
 
 > UAT2 is splitted into 2 Scenario and is combined to UAT4
 
-> 
+> UAT5 and UAT6 are combined
+
+> UAT7 and UAT8 are combined
