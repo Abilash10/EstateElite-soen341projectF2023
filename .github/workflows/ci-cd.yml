@@ -35,11 +35,13 @@ jobs:
       - name: Start Server
         run: |
           cd server/src
+          npm uninstall bcrypt
+          npm install bcrypt
           node index.js &
 
       # Wait for Server to Start
       - name: Wait for Server to Start
-        run: sleep 20
+        run: sleep 10
 
       # Start Client
       - name: Install Client Dependencies
@@ -53,7 +55,7 @@ jobs:
 
       # Wait for Client to Start
       - name: Wait for Client to Start
-        run: sleep 20
+        run: sleep 10
 
       # Run Selenium Tests
       - name: Set up Python
@@ -104,7 +106,7 @@ jobs:
       
       # Wait for Server to Start
       - name: Wait for Server to Start
-        run: sleep 20
+        run: sleep 10
       
       # Start Client
       - name: Install Client Dependencies
@@ -118,7 +120,7 @@ jobs:
       
       # Wait for Client to Start
       - name: Wait for Client to Start
-        run: sleep 20
+        run: sleep 10
       
       # Run Selenium Tests
       - name: Set up Python
