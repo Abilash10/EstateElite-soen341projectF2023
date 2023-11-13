@@ -3,7 +3,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.firefox.options import Options
-from selenium.common.exceptions import NoAlertPresentException
 import logging
 
 # Configure logging
@@ -40,7 +39,7 @@ try:
         )
     )
     search_input.clear()
-    search_input.send_keys("peno")
+    search_input.send_keys("Tester")
     logging.info("Search criteria entered")
 
     # Click the search button
@@ -63,7 +62,8 @@ try:
     Broker_id = first_Broker.get_attribute("id")
 
     if Broker_id:
-        logging.info(f"Broker found: {Broker_id}")
+        logging.info(f"First broker found: {Broker_id}")
+        logging.info(f"\n{first_Broker.text}")
     else:
         logging.error(f"Broker was not found")
 
