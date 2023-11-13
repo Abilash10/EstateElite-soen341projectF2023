@@ -50,7 +50,6 @@ jobs:
         run: |
           cd client
           npm start &
-        #continue-on-error: true----------
 
       # Wait for Client to Start
       - name: Wait for Client to Start
@@ -67,7 +66,7 @@ jobs:
       - name: Setup Firefox
         run: |
           sudo apt-get update
-          sudo apt-get install -y firefox-esr
+          sudo apt-get install -y firefox
           GECKODRIVER_VERSION=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest | grep tag_name | cut -d '"' -f 4)
           wget https://github.com/mozilla/geckodriver/releases/download/$GECKODRIVER_VERSION/geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
           tar -xzf geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
@@ -102,7 +101,6 @@ jobs:
         run: |
           cd server/src
           node index.js &
-      #continue-on-error: true--------------------
       
       # Wait for Server to Start
       - name: Wait for Server to Start
@@ -117,7 +115,6 @@ jobs:
         run: |
           cd client
           npm start &
-        #continue-on-error: true-----------
       
       # Wait for Client to Start
       - name: Wait for Client to Start
