@@ -63,7 +63,10 @@ jobs:
         with:
           python-version: '3.x'
       - name: Install Selenium dependencies
-        run: pip install selenium
+        run: |
+          pip install selenium
+          pip install --upgrade pip
+
 
       - name: Setup Firefox
         run: |
