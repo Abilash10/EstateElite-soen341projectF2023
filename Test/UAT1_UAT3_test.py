@@ -10,11 +10,13 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 # Setup Firefox options
-# options = Options()
-# options.headless = True
-
+options = Options()
+options.headless = True
+firefox_path = os.getenv("FIREFOX_PATH")
+if firefox_path:
+    options.binary_location = firefox_path
 # Initialize WebDriver
-driver = webdriver.Firefox()  # (options=options)
+driver = webdriver.Firefox(options=options)
 
 wait = WebDriverWait(driver, 10)
 
