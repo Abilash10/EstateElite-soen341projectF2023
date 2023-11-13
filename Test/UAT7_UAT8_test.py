@@ -5,6 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.firefox.options import Options
 from selenium.common.exceptions import NoAlertPresentException
 import logging
+import os
 
 # Configure logging
 logging.basicConfig(
