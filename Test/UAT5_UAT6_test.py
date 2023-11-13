@@ -5,7 +5,6 @@ from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import logging
-import os
 
 # Configure logging
 logging.basicConfig(
@@ -15,9 +14,7 @@ logging.basicConfig(
 # Setup Firefox options
 options = Options()
 options.headless = True
-firefox_path = os.getenv("FIREFOX_PATH")
-if firefox_path:
-    options.binary_location = firefox_path
+
 # Initialize WebDriver
 driver = webdriver.Firefox(options=options)
 

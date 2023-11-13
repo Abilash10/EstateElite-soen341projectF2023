@@ -5,7 +5,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.firefox.options import Options
 from selenium.common.exceptions import NoAlertPresentException
 import logging
-import os
 
 # Configure logging
 logging.basicConfig(
@@ -15,9 +14,7 @@ logging.basicConfig(
 # Setup Firefox options to headless
 options = Options()
 options.headless = True
-firefox_path = os.getenv("FIREFOX_PATH")
-if firefox_path:
-    options.binary_location = firefox_path
+
 # Initialize the Firefox driver
 driver = webdriver.Firefox(options=options)
 wait = WebDriverWait(driver, 10)  # Setup wait variable
