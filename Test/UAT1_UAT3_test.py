@@ -13,10 +13,9 @@ logging.basicConfig(level=logging.INFO)
 firefox_options = Options()
 firefox_options.add_argument("--headless")
 
-wait = WebDriverWait(driver, 10)
-
 # Initialize the WebDriver to use Firefox
 driver = webdriver.Firefox(options=firefox_options)
+wait = WebDriverWait(driver, 10)
 
 try:
     # Navigate to the homepage
