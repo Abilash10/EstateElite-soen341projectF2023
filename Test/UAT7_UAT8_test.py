@@ -11,9 +11,9 @@ logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-# Setup Firefox options to headless
+# Setup Firefox options
 options = Options()
-options.headless = True
+options.headless = True  # Run in headless mode
 
 # Initialize the Firefox driver
 driver = webdriver.Firefox(options=options)
