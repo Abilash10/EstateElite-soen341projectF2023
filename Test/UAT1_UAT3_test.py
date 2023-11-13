@@ -10,11 +10,11 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 # Run Firefox in headless mode for testing environment
-# firefox_options = Options()
-# firefox_options.add_argument("--headless")
+firefox_options = Options()
+firefox_options.add_argument("--headless")
 
 # Initialize the WebDriver to use Firefox
-driver = webdriver.Firefox()  # (options=firefox_options)
+driver = webdriver.Firefox(options=firefox_options)
 
 wait = WebDriverWait(driver, 10)
 

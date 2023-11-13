@@ -65,10 +65,15 @@ jobs:
       - name: Install Selenium dependencies
         run: pip install selenium
 
-      - name: Setup Browser
+      - name: Setup Firefox
         run: |
           sudo apt-get update
           sudo apt-get install -y firefox
+          GECKODRIVER_VERSION=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest | grep tag_name | cut -d '"' -f 4)
+          wget https://github.com/mozilla/geckodriver/releases/download/$GECKODRIVER_VERSION/geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
+          tar -xzf geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
+          sudo mv geckodriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/geckodriver
 
       - name: Register user Test
         run: python3 Test/UAT1_UAT3_test.py
@@ -125,7 +130,7 @@ jobs:
       - name: Install Selenium dependencies
         run: pip install selenium
       
-      - name: Setup Browser
+      - name: Setup Firefox
         run: |
           sudo apt-get update
           sudo apt-get install -y firefox
