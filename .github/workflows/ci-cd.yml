@@ -195,7 +195,6 @@ jobs:
         with:
           python-version: '3.x'
               
-      # Fetch the matching ChromeDriver
       - name: Install ChromeDriver
         run: |
           sudo apt-get update
@@ -204,7 +203,7 @@ jobs:
           echo "Detected Chrome version: $CHROME_VERSION"
           CHROMEDRIVER_URL="https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION"
           CHROMEDRIVER_VERSION=$(curl -s "$CHROMEDRIVER_URL")
-          if [[ "$CHROMEDRIVER_VERSION" == "" ]]; then
+          if [[ "$CHROMEDRIVER_VERSION" == "" ]] || [[ "$CHROMEDRIVER_VERSION" == *"<Error>"* ]]; then
             echo "Failed to fetch the latest ChromeDriver version for Chrome version $CHROME_VERSION from $CHROMEDRIVER_URL"
             exit 1
           fi
@@ -219,7 +218,7 @@ jobs:
           sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
           sudo chown root:root /usr/local/bin/chromedriver
           sudo chmod 0755 /usr/local/bin/chromedriver
-
+        
               
       # Install Selenium dependencies
       - name: Install Selenium dependencies
