@@ -114,7 +114,7 @@ jobs:
         
       # Wait for Server to Start
       - name: Wait for Server to Start
-        run: sleep 20
+        run: sleep 10
         
       # Start Client
       - name: Install Client Dependencies
@@ -129,7 +129,7 @@ jobs:
         
       # Wait for Client to Start
       - name: Wait for Client to Start
-        run: sleep 20
+        run: sleep 10
         
       # Run Selenium Tests
       - name: Set up Python
@@ -152,6 +152,74 @@ jobs:
       - name: Search Broker test
         run: |
           python3 Test/UAT9_test.py
+
+  test-Chromedriver:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+             
+      # Start Server
+      - name: Install Server Dependencies
+        run: |
+          cd server
+          npm install
+      - name: Start Server
+        run: |
+          cd server/src
+          node index.js &
+        continue-on-error: true
+        
+      # Wait for Server to Start
+      - name: Wait for Server to Start
+        run: sleep 10
+        
+      # Start Client
+      - name: Install Client Dependencies
+        run: |
+          cd client
+          npm install
+      - name: Start Client
+        run: |
+          cd client
+          npm start &
+        continue-on-error: true
+        
+      # Wait for Client to Start
+      - name: Wait for Client to Start
+        run: sleep 10
+      
+
+      # Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+              
+      # Install Chrome browser
+      - name: Setup Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+              
+      # Fetch the matching ChromeDriver
+      - name: Install ChromeDriver
+        run: |
+          CHROME_VERSION=$(google-chrome --version | cut -f 3 -d ' ' | cut -d '.' -f 1)
+          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
+          wget -N "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -P ~/
+          unzip ~/chromedriver_linux64.zip -d ~/
+          rm -f ~/chromedriver_linux64.zip
+          sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
+          sudo chown root:root /usr/local/bin/chromedriver
+          sudo chmod 0755 /usr/local/bin/chromedriver
+              
+      # Install Selenium dependencies
+      - name: Install Selenium dependencies
+        run: pip install selenium
+              
+      # Run Selenium Test
+      - name: Run UAT1_UAT3 Test
+        run: python3 Test/UAT1_UAT3_test.py
           
               
         
