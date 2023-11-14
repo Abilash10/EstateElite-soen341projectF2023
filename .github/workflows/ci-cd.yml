@@ -3,12 +3,10 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main
       - test
   pull_request:
     branches:
       - test
-      - main
 
 jobs:
   display-info:
@@ -93,18 +91,18 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
+
       - name: Install Selenium dependencies
         run: pip install selenium
       - name: Setup Chrome
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
+
       - name: Register user Test
         run: |
-          cd client
-          python3 UAT1_test.py
+          python3 client/UAT_1_3_test.py
 
       - name: Login user Test
         run: |
-          cd client
-          python3 UAT2_test.py
+          python3 client/UAT_2_4_test.py
