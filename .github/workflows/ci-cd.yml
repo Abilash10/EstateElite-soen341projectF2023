@@ -199,12 +199,11 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
-          CHROME_VERSION=$(google-chrome --version | cut -f 3 -d ' ' | cut -d '.' -f 1)
-          echo "Detected Chrome version: $CHROME_VERSION"
-          CHROMEDRIVER_URL="https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION"
-          CHROMEDRIVER_VERSION=$(curl -s "$CHROMEDRIVER_URL")
+          FULL_CHROME_VERSION=$(google-chrome --version | cut -f 3 -d ' ' | cut -d '.' -f 1,2)
+          echo "Detected full Chrome version: $FULL_CHROME_VERSION"
+          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$FULL_CHROME_VERSION")
           if [[ "$CHROMEDRIVER_VERSION" == "" ]] || [[ "$CHROMEDRIVER_VERSION" == *"<Error>"* ]]; then
-            echo "Failed to fetch the latest ChromeDriver version for Chrome version $CHROME_VERSION from $CHROMEDRIVER_URL"
+            echo "Failed to fetch the latest ChromeDriver version for Chrome version $FULL_CHROME_VERSION from https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$FULL_CHROME_VERSION"
             exit 1
           fi
           echo "Detected ChromeDriver version: $CHROMEDRIVER_VERSION"
