@@ -3,15 +3,11 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main
       - test
-      - Ktesting
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
       - test
-      - main
-      - Ktesting
 
 jobs:
   display-info:
