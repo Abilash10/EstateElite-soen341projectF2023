@@ -65,6 +65,7 @@ jobs:
 
       - name: Install Selenium dependencies
         run: |
+          cd Test
           pip install selenium
           pip install --upgrade pip
 
