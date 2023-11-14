@@ -42,7 +42,7 @@ jobs:
 
       # Wait for Server to Start
       - name: Wait for Server to Start
-        run: sleep 20
+        run: sleep 10
 
       # Start Client
       - name: Install Client Dependencies
@@ -57,16 +57,8 @@ jobs:
 
       # Wait for Client to Start
       - name: Wait for Client to Start
-        run: sleep 20
+        run: sleep 10
 
-      # Run Selenium Tests
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
-
-      - name: Install Selenium dependencies
-        run: pip install selenium
       - name: Setup Chrome
         run: |
           sudo apt-get update
@@ -76,6 +68,19 @@ jobs:
           unzip chromedriver_linux64.zip
           sudo mv chromedriver /usr/local/bin/
           sudo chmod +x /usr/local/bin/chromedriver
+
+      # Run Selenium Tests
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install Selenium dependencies
+        run: pip install selenium
+
+      - name: Register user Test
+        run: |
+          python3 Test/UAT1_UAT3_test.py
   
       - name: Login user Test
         run: |
@@ -89,10 +94,7 @@ jobs:
       - name: Check Basic search and visit request
         run: |
           python3 Test/UAT7_UAT8_test.py
-      
-      - name: Register user Test
-        run: |
-          python3 Test/UAT1_UAT3_test.py
+
           
   Sprint-3-Scenario:
     runs-on: ubuntu-latest
@@ -143,6 +145,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
         
+      - name: Register user Test --
+        run: |
+          python3 Test/UAT1_UAT3_test.py
+      
       - name: Search Broker test
         run: |
           python3 Test/UAT9_test.py
