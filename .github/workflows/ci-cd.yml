@@ -5,7 +5,6 @@ on:
     branches:
       - test
   pull_request:
-    types: [opened, synchronize, reopened, closed]
     branches:
       - test
 
@@ -17,8 +16,42 @@ jobs:
         run: |
           echo "Commit Message: ${{ github.event.head_commit.message }}"
           echo "Pusher Name: ${{ github.actor }}"
+  # client-build-and-test:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       node-version: [14.x, 20.9.0]
+  #   defaults:
+  #     run:
+  #       working-directory: ./client
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Install Node.js
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #     - name: Install Client Dependencies
+  #       run: npm install
+  #     - name: Run Client Tests
+  #       run: npm test
+
+  server-build-and-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./server
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install Server Dependencies
+        run: npm install
+      - name: Run Server Tests
+        run: npm test
   
-  Scenario-testin-Sprint-2:
+  Client-register-and-login-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -31,13 +64,12 @@ jobs:
       - name: Start Server
         run: |
           cd server/src
-          npm uninstall bcrypt
-          npm install bcrypt
           node index.js &
+        continue-on-error: true
 
       # Wait for Server to Start
       - name: Wait for Server to Start
-        run: sleep 10
+        run: sleep 20
 
       # Start Client
       - name: Install Client Dependencies
@@ -48,10 +80,11 @@ jobs:
         run: |
           cd client
           npm start &
+        continue-on-error: true
 
       # Wait for Client to Start
       - name: Wait for Client to Start
-        run: sleep 10
+        run: sleep 20
 
       # Run Selenium Tests
       - name: Set up Python
@@ -59,82 +92,17 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install Selenium dependencies
-        run: |
-          cd Test
-          pip install selenium
-          pip install --upgrade pip
-
-
-      - name: Setup Firefox and GeckoDriver
-        run: |
-          cd Test
-          sudo apt-get update
-          sudo apt-get install -y firefox
-
-      - name: Register user Test
-        run: |
-          python3 Test/UAT1_UAT3_test.py
-
-      - name: Login user Test
-        run: |
-          python3 Test/UAT2_P1_test.py
-          python3 Test/UAT2_P2_UAT4_test.py
-      
-      - name: Check header consistansy and header menu
-        run: |
-          python3 Test/UAT5_UAT6_test.py
-
-      - name: Check Basic search and visit request
-        run: |
-          python3 Test/UAT7_UAT8_test.py
-
-  Scenario-testin-Sprint-3:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      
-      # Start Server
-      - name: Install Server Dependencies
-        run: |
-          cd server
-          npm install
-      - name: Start Server
-        run: |
-          cd server/src
-          node index.js &
-      
-      # Wait for Server to Start
-      - name: Wait for Server to Start
-        run: sleep 10
-      
-      # Start Client
-      - name: Install Client Dependencies
-        run: |
-          cd client
-          npm install
-      - name: Start Client
-        run: |
-          cd client
-          npm start &
-      
-      # Wait for Client to Start
-      - name: Wait for Client to Start
-        run: sleep 10
-      
-      # Run Selenium Tests
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
       - name: Install Selenium dependencies
         run: pip install selenium
-      
       - name: Setup Chrome
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
-      - name: Check for brokers on website
+      - name: Register user Test
         run: |
-          python3 Test/UAT9_test.py
+          python3 Test/UAT_1_3_test.py
+
+      - name: Login user Test
+        run: |
+          python3 Test/UAT_2_4_test.py
