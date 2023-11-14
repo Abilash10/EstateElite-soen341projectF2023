@@ -101,8 +101,8 @@ jobs:
 
       - name: Register user Test
         run: |
-          python3 client/UAT_1_3_test.py
+          python3 Test/UAT_1_3_test.py
 
       - name: Login user Test
         run: |
-          python3 client/UAT_2_4_test.py
+          python3 Test/UAT_2_4_test.py
