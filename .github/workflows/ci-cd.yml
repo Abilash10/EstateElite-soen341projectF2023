@@ -199,7 +199,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
-          FULL_CHROME_VERSION=$(google-chrome --version | cut -f 3 -d ' ' | cut -d '.' -f 1,2)
+          FULL_CHROME_VERSION=$(google-chrome --version | cut -f 3 -d ' ' | cut -d '.' -f 1)
           echo "Detected full Chrome version: $FULL_CHROME_VERSION"
           CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$FULL_CHROME_VERSION")
           if [[ "$CHROMEDRIVER_VERSION" == "" ]] || [[ "$CHROMEDRIVER_VERSION" == *"<Error>"* ]]; then
@@ -217,8 +217,8 @@ jobs:
           sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
           sudo chown root:root /usr/local/bin/chromedriver
           sudo chmod 0755 /usr/local/bin/chromedriver
-        
-              
+
+
       # Install Selenium dependencies
       - name: Install Selenium dependencies
         run: pip install selenium
