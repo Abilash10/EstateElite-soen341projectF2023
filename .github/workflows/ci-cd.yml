@@ -139,4 +139,4 @@ jobs:
 
       - name: Check for brokers on website
         run: |
-          python3 Test/UAT9_test.py.py
+          python3 Test/UAT9_test.py
