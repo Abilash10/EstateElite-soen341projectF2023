@@ -153,70 +153,58 @@ jobs:
         run: |
           python3 Test/UAT9_test.py
 
-  test-Chromedriver:
+  #write a third job to that settup the chrome driver and run the selenium tests Test/UAT1_UAT3_test.py
+  Test-Scenario:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-             
+      
       # Start Server
       - name: Install Server Dependencies
         run: |
           cd server
           npm install
+
       - name: Start Server
         run: |
           cd server/src
           node index.js &
         continue-on-error: true
-        
+
       # Wait for Server to Start
       - name: Wait for Server to Start
         run: sleep 10
-        
+
       # Start Client
       - name: Install Client Dependencies
         run: |
           cd client
           npm install
+
       - name: Start Client
         run: |
           cd client
           npm start &
         continue-on-error: true
-        
+
       # Wait for Client to Start
       - name: Wait for Client to Start
         run: sleep 10
-      
 
-      # Set up Python environment
-      - name: Setup Chrome and Chromedriver
-        run: |
-          sudo rm -f /usr/local/bin/chromedriver
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-          CHROME_VERSION=$(google-chrome --version | awk '{print $3}' | cut -d '.' -f 1)
-          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
-          if [ -z "$CHROMEDRIVER_VERSION" ]; then
-            echo "Failed to fetch the ChromeDriver version for Chrome $CHROME_VERSION, exiting."
-            exit 1
-          fi
-          echo "Detected ChromeDriver version: $CHROMEDRIVER_VERSION"
-          wget -N "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip" -P ~/
-          unzip ~/chromedriver_linux64.zip -d ~/
-          sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
-          sudo chmod 0755 /usr/local/bin/chromedriver
-          rm ~/chromedriver_linux64.zip
+      # Run Selenium Tests
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
 
-
-      # Install Selenium dependencies
       - name: Install Selenium dependencies
         run: pip install selenium
-              
-      # Run Selenium Test
-      - name: Run UAT1_UAT3 Test
-        run: python3 Test/UAT1_UAT3_test.py
-          
-              
-        
 
+      - name: Setup Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Register user Test
+        run: |
+          python3 Test/UAT1_UAT3_test.py
