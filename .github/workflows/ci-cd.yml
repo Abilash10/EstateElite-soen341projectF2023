@@ -199,24 +199,17 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
-          FULL_CHROME_VERSION=$(google-chrome --version | cut -f 3 -d ' ' | cut -d '.' -f 1)
-          echo "Detected full Chrome version: $FULL_CHROME_VERSION"
-          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$FULL_CHROME_VERSION")
-          if [[ "$CHROMEDRIVER_VERSION" == "" ]] || [[ "$CHROMEDRIVER_VERSION" == *"<Error>"* ]]; then
-            echo "Failed to fetch the latest ChromeDriver version for Chrome version $FULL_CHROME_VERSION from https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$FULL_CHROME_VERSION"
-            exit 1
-          fi
-          echo "Detected ChromeDriver version: $CHROMEDRIVER_VERSION"
+          # Fetch the latest stable ChromeDriver
+          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
+          echo "Using ChromeDriver version: $CHROMEDRIVER_VERSION"
+          # Download and install ChromeDriver
           wget -N "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -P ~/
-          if [[ "$?" -ne 0 ]]; then
-            echo "Failed to download ChromeDriver version $CHROMEDRIVER_VERSION"
-            exit 1
-          fi
           unzip ~/chromedriver_linux64.zip -d ~/
-          rm -f ~/chromedriver_linux64.zip
           sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
-          sudo chown root:root /usr/local/bin/chromedriver
           sudo chmod 0755 /usr/local/bin/chromedriver
+          # Clean up the downloaded zip file
+          rm -f ~/chromedriver_linux64.zip
+        
 
 
       # Install Selenium dependencies
