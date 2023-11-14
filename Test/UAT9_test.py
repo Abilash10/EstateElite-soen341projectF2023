@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.chrome.options import Options
 import logging
 
 # Configure logging
@@ -10,12 +10,12 @@ logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-# Setup Firefox options
+# Setup Chrome options
 options = Options()
 options.headless = True  # Run in headless mode
 
-# Initialize the Firefox driver
-driver = webdriver.Firefox(options=options)
+# Initialize the Chrome driver
+driver = webdriver.Chrome(options=options)
 wait = WebDriverWait(driver, 10)  # Setup wait variable
 
 try:

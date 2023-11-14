@@ -131,7 +131,12 @@ jobs:
       - name: Install Selenium dependencies
         run: pip install selenium
       
-      - name: Setup Firefox
+      - name: Setup Chrome
         run: |
           sudo apt-get update
-          sudo apt-get install -y firefox
+          sudo apt-get install -y google-chrome-stable
+          
+
+      - name: Check for brokers on website
+        run: |
+          python3 Test/UAT9_test.py.py
