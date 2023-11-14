@@ -190,26 +190,23 @@ jobs:
       
 
       # Set up Python environment
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
-              
-      - name: Install ChromeDriver
+      - name: Setup Chrome and Chromedriver
         run: |
+          sudo rm -f /usr/local/bin/chromedriver
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
-          # Fetch the latest stable ChromeDriver
-          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
-          echo "Using ChromeDriver version: $CHROMEDRIVER_VERSION"
-          # Download and install ChromeDriver
-          wget -N "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -P ~/
+          CHROME_VERSION=$(google-chrome --version | awk '{print $3}' | cut -d '.' -f 1)
+          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
+          if [ -z "$CHROMEDRIVER_VERSION" ]; then
+            echo "Failed to fetch the ChromeDriver version for Chrome $CHROME_VERSION, exiting."
+            exit 1
+          fi
+          echo "Detected ChromeDriver version: $CHROMEDRIVER_VERSION"
+          wget -N "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip" -P ~/
           unzip ~/chromedriver_linux64.zip -d ~/
           sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
           sudo chmod 0755 /usr/local/bin/chromedriver
-          # Clean up the downloaded zip file
-          rm -f ~/chromedriver_linux64.zip
-        
+          rm ~/chromedriver_linux64.zip
 
 
       # Install Selenium dependencies
