@@ -5,19 +5,18 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.firefox.options import Options
 from selenium.common.exceptions import NoAlertPresentException
 import logging
+from selenium.webdriver.chrome.options import Options
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
-)
+# Initialize logging
+logging.basicConfig(level=logging.INFO)
 
-# Setup Firefox options
+# Run in headless mode for testing environment
 options = Options()
-options.headless = True  # Run in headless mode
+options.add_argument("--headless")
 
-# Initialize the Firefox driver
-driver = webdriver.Firefox(options=options)
-wait = WebDriverWait(driver, 10)  # Setup wait variable
+# Initialize the WebDriver
+driver = webdriver.Chrome(options=options)
+wait = WebDriverWait(driver, 10)
 
 try:
     # Navigate to the URL

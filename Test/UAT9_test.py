@@ -4,19 +4,18 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 import logging
+from selenium.webdriver.chrome.options import Options
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
-)
+# Initialize logging
+logging.basicConfig(level=logging.INFO)
 
-# Setup Chrome options
+# Run in headless mode for testing environment
 options = Options()
-options.headless = True  # Run in headless mode
+options.add_argument("--headless")
 
-# Initialize the Chrome driver
+# Initialize the WebDriver
 driver = webdriver.Chrome(options=options)
-wait = WebDriverWait(driver, 10)  # Setup wait variable
+wait = WebDriverWait(driver, 10)
 
 try:
     # Navigate to the URL

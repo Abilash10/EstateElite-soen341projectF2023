@@ -5,17 +5,17 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.firefox.options import Options
 import logging
+from selenium.webdriver.chrome.options import Options
 
 # Initialize logging
 logging.basicConfig(level=logging.INFO)
 
-# Run Firefox in headless mode for testing environment
-firefox_options = Options()
-firefox_options.add_argument("--headless")
+# Run in headless mode for testing environment
+options = Options()
+options.add_argument("--headless")
 
-# Initialize the WebDriver to use Firefox
-driver = webdriver.Firefox(options=firefox_options)
-
+# Initialize the WebDriver
+driver = webdriver.Chrome(options=options)
 wait = WebDriverWait(driver, 10)
 
 try:

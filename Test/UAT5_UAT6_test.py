@@ -5,19 +5,17 @@ from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import logging
+from selenium.webdriver.chrome.options import Options
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
-)
+# Initialize logging
+logging.basicConfig(level=logging.INFO)
 
-# Setup Firefox options
+# Run in headless mode for testing environment
 options = Options()
-options.headless = True
+options.add_argument("--headless")
 
-# Initialize WebDriver
-driver = webdriver.Firefox(options=options)
-
+# Initialize the WebDriver
+driver = webdriver.Chrome(options=options)
 wait = WebDriverWait(driver, 10)
 
 try:

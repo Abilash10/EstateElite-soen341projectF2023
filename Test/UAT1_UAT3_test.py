@@ -2,19 +2,19 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.firefox.options import Options
 from selenium.common.exceptions import NoAlertPresentException
 import logging
+from selenium.webdriver.chrome.options import Options
 
 # Initialize logging
 logging.basicConfig(level=logging.INFO)
 
-# Run Firefox in headless mode for testing environment
-firefox_options = Options()
-firefox_options.add_argument("--headless")
+# Run in headless mode for testing environment
+options = Options()
+options.add_argument("--headless")
 
-# Initialize the WebDriver to use Firefox
-driver = webdriver.Firefox(options=firefox_options)
+# Initialize the WebDriver
+driver = webdriver.Chrome(options=options)
 wait = WebDriverWait(driver, 10)
 
 try:
