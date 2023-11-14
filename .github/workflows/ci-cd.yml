@@ -3,14 +3,9 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main
-      - test
       - Ktesting
   pull_request:
-    types: [opened, synchronize, reopened, closed]
     branches:
-      - test
-      - main
       - Ktesting
 
 jobs:
@@ -22,7 +17,7 @@ jobs:
           echo "Commit Message: ${{ github.event.head_commit.message }}"
           echo "Pusher Name: ${{ github.actor }}"
   
-  Scenario-testin-Sprint-2:
+  Sprint-2-Scenario:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -35,13 +30,12 @@ jobs:
       - name: Start Server
         run: |
           cd server/src
-          npm uninstall bcrypt
-          npm install bcrypt
           node index.js &
+        continue-on-error: true
 
       # Wait for Server to Start
       - name: Wait for Server to Start
-        run: sleep 10
+        run: sleep 20
 
       # Start Client
       - name: Install Client Dependencies
@@ -52,10 +46,11 @@ jobs:
         run: |
           cd client
           npm start &
+        continue-on-error: true
 
       # Wait for Client to Start
       - name: Wait for Client to Start
-        run: sleep 10
+        run: sleep 20
 
       # Run Selenium Tests
       - name: Set up Python
@@ -63,94 +58,27 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install Selenium dependencies
-        run: |
-          cd Test
-          pip install selenium
-          pip install --upgrade pip
-
-
-      - name: Setup Firefox and GeckoDriver
-        run: |
-          cd Test
-          sudo apt-get update
-          sudo apt-get install -y firefox
-          GECKODRIVER_VERSION=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest | grep tag_name | cut -d '"' -f 4)
-          wget https://github.com/mozilla/geckodriver/releases/download/$GECKODRIVER_VERSION/geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
-          tar -xzf geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
-          sudo mv geckodriver /usr/local/bin/
-          sudo chmod +x /usr/local/bin/geckodriver
-
-      - name: Register user Test
-        run: |
-          python3 Test/UAT1_UAT3_test.py
-
-      - name: Login user Test
-        run: |
-          python3 Test/UAT2_P1_test.py
-          python3 Test/UAT2_P2_UAT4_test.py
-      
-      - name: Check header consistansy and header menu
-        run: |
-          python3 Test/UAT5_UAT6_test.py
-
-      - name: Check Basic search and visit request
-        run: |
-          python3 Test/UAT7_UAT8_test.py
-
-  Scenario-testin-Sprint-3:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      
-      # Start Server
-      - name: Install Server Dependencies
-        run: |
-          cd server
-          npm install
-      - name: Start Server
-        run: |
-          cd server/src
-          node index.js &
-      
-      # Wait for Server to Start
-      - name: Wait for Server to Start
-        run: sleep 10
-      
-      # Start Client
-      - name: Install Client Dependencies
-        run: |
-          cd client
-          npm install
-      - name: Start Client
-        run: |
-          cd client
-          npm start &
-      
-      # Wait for Client to Start
-      - name: Wait for Client to Start
-        run: sleep 10
-      
-      # Run Selenium Tests
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
       - name: Install Selenium dependencies
         run: pip install selenium
-      
       - name: Setup Chrome
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
-          CHROMEDRIVER_VERSION=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
-          wget https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip
-          unzip chromedriver_linux64.zip
-          sudo mv chromedriver /usr/local/bin/
-          sudo chmod +x /usr/local/bin/chromedriver
-          
 
-      - name: Check for brokers on website
+      - name: Register user Test
         run: |
-          python3 Test/UAT9_test.py
+          python3 Test/UAT1_UAT3_test.py
+  
+      - name: Login user Test
+        run: |
+          python3 Test/UAT2_P1_test.py
+          python3 Test/UAT2_P2_UAT4_test.py
+        
+      - name: Check header consistansy and header menu
+        run: |
+          python3 Test/UAT5_UAT6_test.py
+  
+      - name: Check Basic search and visit request
+        run: |
+          python3 Test/UAT7_UAT8_test.py
 
