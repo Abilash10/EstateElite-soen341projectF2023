@@ -195,23 +195,31 @@ jobs:
         with:
           python-version: '3.x'
               
-      # Install Chrome browser
-      - name: Setup Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-              
       # Fetch the matching ChromeDriver
       - name: Install ChromeDriver
         run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
           CHROME_VERSION=$(google-chrome --version | cut -f 3 -d ' ' | cut -d '.' -f 1)
-          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
+          echo "Detected Chrome version: $CHROME_VERSION"
+          CHROMEDRIVER_URL="https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION"
+          CHROMEDRIVER_VERSION=$(curl -s "$CHROMEDRIVER_URL")
+          if [[ "$CHROMEDRIVER_VERSION" == "" ]]; then
+            echo "Failed to fetch the latest ChromeDriver version for Chrome version $CHROME_VERSION from $CHROMEDRIVER_URL"
+            exit 1
+          fi
+          echo "Detected ChromeDriver version: $CHROMEDRIVER_VERSION"
           wget -N "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -P ~/
+          if [[ "$?" -ne 0 ]]; then
+            echo "Failed to download ChromeDriver version $CHROMEDRIVER_VERSION"
+            exit 1
+          fi
           unzip ~/chromedriver_linux64.zip -d ~/
           rm -f ~/chromedriver_linux64.zip
           sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
           sudo chown root:root /usr/local/bin/chromedriver
           sudo chmod 0755 /usr/local/bin/chromedriver
+
               
       # Install Selenium dependencies
       - name: Install Selenium dependencies
