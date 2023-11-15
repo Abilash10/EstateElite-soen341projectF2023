@@ -189,3 +189,47 @@ jobs:
       - name: Test script
         run: |
           python3 Test/UAT1_UAT3_test.py
+
+  test-application:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        
+      # Start Server
+      - name: Install and Start Server
+        run: |
+          cd server
+          npm install
+          cd src
+          npm uninstall bcrypt
+          npm install bcrypt
+          nohup node index.js &
+        
+      # Start Client
+      - name: Install and Start Client
+        run: |
+          cd client
+          npm install
+          nohup npm start &
+        
+      - name: Wait for Applications to Start
+        run: sleep 30
+        
+      # Setup Firefox
+      - name: Setup Firefox
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y firefox
+          GECKODRIVER_VERSION=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest | grep tag_name | cut -d '"' -f 4)
+          wget https://github.com/mozilla/geckodriver/releases/download/$GECKODRIVER_VERSION/geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
+          tar -xzf geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
+          sudo mv geckodriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/geckodriver
+        
+      # Run Selenium Tests
+      - name: Set up Python and Run Selenium Tests
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip
+          pip install selenium
+          python3 Test/UAT1_UAT3_test.py
