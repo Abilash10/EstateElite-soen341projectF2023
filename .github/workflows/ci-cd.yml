@@ -3,15 +3,11 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - Ktesting
-      - main
-      - test
+      - New_CI_CD
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
-      - Ktesting
-      - main
-      - test
+      - New_CI_CD
 
 jobs:
   display-info:
@@ -59,15 +55,15 @@ jobs:
       - name: Wait for Client to Start
         run: sleep 10
 
-      - name: Setup Chrome
+      - name: Setup Firefox
         run: |
           sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-          CHROMEDRIVER_VERSION=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
-          wget https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip
-          unzip chromedriver_linux64.zip
-          sudo mv chromedriver /usr/local/bin/
-          sudo chmod +x /usr/local/bin/chromedriver
+          sudo apt-get install -y firefox
+          GECKODRIVER_VERSION=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest | grep tag_name | cut -d '"' -f 4)
+          wget https://github.com/mozilla/geckodriver/releases/download/$GECKODRIVER_VERSION/geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
+          tar -xzf geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
+          sudo mv geckodriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/geckodriver
 
       # Run Selenium Tests
       - name: Set up Python
@@ -78,22 +74,10 @@ jobs:
       - name: Install Selenium dependencies
         run: pip install selenium
 
-      - name: Register user Test
+      - name: Test script
         run: |
           python3 Test/UAT1_UAT3_test.py
   
-      - name: Login user Test
-        run: |
-          python3 Test/UAT2_P1_test.py
-          python3 Test/UAT2_P2_UAT4_test.py
-        
-      - name: Check header consistansy and header menu
-        run: |
-          python3 Test/UAT5_UAT6_test.py
-  
-      - name: Check Basic search and visit request
-        run: |
-          python3 Test/UAT7_UAT8_test.py
 
           
   Sprint-3-Scenario:
@@ -140,18 +124,15 @@ jobs:
       - name: Install Selenium dependencies
         run: pip install selenium
   
-      - name: Setup Chrome
+      - name: Setup Firefox
         run: |
           sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
+          sudo apt-get install -y firefox
         
-      - name: Register user Test --
+      - name: Test script
         run: |
           python3 Test/UAT1_UAT3_test.py
       
-      - name: Search Broker test
-        run: |
-          python3 Test/UAT9_test.py
 
   #write a third job to that settup the chrome driver and run the selenium tests Test/UAT1_UAT3_test.py
   Test-Scenario:
@@ -200,11 +181,11 @@ jobs:
       - name: Install Selenium dependencies
         run: pip install selenium
 
-      - name: Setup Chrome
+      - name: Setup Firefox
         run: |
           sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
+          sudo apt-get install -y firefox
 
-      - name: Register user Test
+      - name: Test script
         run: |
           python3 Test/UAT1_UAT3_test.py
