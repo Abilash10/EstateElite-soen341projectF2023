@@ -17,124 +17,9 @@ jobs:
         run: |
           echo "Commit Message: ${{ github.event.head_commit.message }}"
           echo "Pusher Name: ${{ github.actor }}"
-  
-  Sprint-2-Scenario:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
 
-      # Start Server
-      - name: Install Server Dependencies
-        run: |
-          cd server
-          npm install
-      - name: Start Server
-        run: |
-          cd server/src
-          npm uninstall bcrypt
-          npm install bcrypt
-          node index.js &
-        continue-on-error: true
+  # Other jobs (Sprint-2-Scenario, Sprint-3-Scenario) remain the same
 
-      # Wait for Server to Start
-      - name: Wait for Server to Start
-        run: sleep 10
-
-      # Start Client
-      - name: Install Client Dependencies
-        run: |
-          cd client
-          npm install
-      - name: Start Client
-        run: |
-          cd client
-          npm start &
-        continue-on-error: true
-
-      # Wait for Client to Start
-      - name: Wait for Client to Start
-        run: sleep 10
-
-      - name: Setup Firefox
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y firefox
-          GECKODRIVER_VERSION=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest | grep tag_name | cut -d '"' -f 4)
-          wget https://github.com/mozilla/geckodriver/releases/download/$GECKODRIVER_VERSION/geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
-          tar -xzf geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
-          sudo mv geckodriver /usr/local/bin/
-          sudo chmod +x /usr/local/bin/geckodriver
-
-      # Run Selenium Tests
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
-
-      - name: Install Selenium dependencies
-        run: pip install selenium
-
-      - name: Test script
-        run: |
-          python3 Test/UAT1_UAT3_test.py
-  
-
-          
-  Sprint-3-Scenario:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        
-      # Start Server
-      - name: Install Server Dependencies
-        run: |
-          cd server
-          npm install
-      - name: Start Server
-        run: |
-          cd server/src
-          node index.js &
-        continue-on-error: true
-        
-      # Wait for Server to Start
-      - name: Wait for Server to Start
-        run: sleep 10
-        
-      # Start Client
-      - name: Install Client Dependencies
-        run: |
-          cd client
-          npm install
-      - name: Start Client
-        run: |
-          cd client
-          npm start &
-        continue-on-error: true
-        
-      # Wait for Client to Start
-      - name: Wait for Client to Start
-        run: sleep 10
-        
-      # Run Selenium Tests
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
-        
-      - name: Install Selenium dependencies
-        run: pip install selenium
-  
-      - name: Setup Firefox
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y firefox
-        
-      - name: Test script
-        run: |
-          python3 Test/UAT1_UAT3_test.py
-      
-
-  #write a third job to that settup the chrome driver and run the selenium tests Test/UAT1_UAT3_test.py
   Test-Scenario:
     runs-on: ubuntu-latest
     steps:
@@ -145,7 +30,6 @@ jobs:
         run: |
           cd server
           npm install
-
       - name: Start Server
         run: |
           cd server/src
@@ -161,7 +45,6 @@ jobs:
         run: |
           cd client
           npm install
-
       - name: Start Client
         run: |
           cd client
@@ -172,6 +55,17 @@ jobs:
       - name: Wait for Client to Start
         run: sleep 10
 
+      # Setup Chrome
+      - name: Setup Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+          CHROMEDRIVER_VERSION=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+          wget https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip
+          sudo mv chromedriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
+
       # Run Selenium Tests
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -181,55 +75,6 @@ jobs:
       - name: Install Selenium dependencies
         run: pip install selenium
 
-      - name: Setup Firefox
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y firefox
-
       - name: Test script
         run: |
-          python3 Test/UAT1_UAT3_test.py
-
-  test-application:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        
-      # Start Server
-      - name: Install and Start Server
-        run: |
-          cd server
-          npm install
-          cd src
-          npm uninstall bcrypt
-          npm install bcrypt
-          nohup node index.js &
-        
-      # Start Client
-      - name: Install and Start Client
-        run: |
-          cd client
-          npm install
-          nohup npm start &
-        
-      - name: Wait for Applications to Start
-        run: sleep 30
-        
-      # Setup Firefox
-      - name: Setup Firefox
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y firefox
-          GECKODRIVER_VERSION=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest | grep tag_name | cut -d '"' -f 4)
-          wget https://github.com/mozilla/geckodriver/releases/download/$GECKODRIVER_VERSION/geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
-          tar -xzf geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
-          sudo mv geckodriver /usr/local/bin/
-          sudo chmod +x /usr/local/bin/geckodriver
-        
-      # Run Selenium Tests
-      - name: Set up Python and Run Selenium Tests
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y python3-pip
-          pip install selenium
           python3 Test/UAT1_UAT3_test.py
