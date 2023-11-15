@@ -7,12 +7,15 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
 import logging
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
 
 class TestTry(unittest.TestCase):
     def setUp(self):
-        # Set up local WebDriver for Firefox
-        self.driver = webdriver.Firefox()
+        options = FirefoxOptions()
+        # Specify the path to Firefox binary if necessary
+        options.binary_location = "/usr/bin/firefox"  # Common path in Ubuntu
+        self.driver = webdriver.Firefox(options=options)
         self.driver.implicitly_wait(10)
         self.base_url = "https://www.blazedemo.com/"
         self.verificationErrors = []
