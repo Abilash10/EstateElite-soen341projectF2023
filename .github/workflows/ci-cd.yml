@@ -8,6 +8,7 @@ on:
     types: [opened, synchronize, reopened, closed]
     branches:
       - New_CI_CD
+  workflow_dispatch:
 
 jobs:
   display-info:
@@ -17,8 +18,6 @@ jobs:
         run: |
           echo "Commit Message: ${{ github.event.head_commit.message }}"
           echo "Pusher Name: ${{ github.actor }}"
-
-  # Other jobs (Sprint-2-Scenario, Sprint-3-Scenario) remain the same
 
   Test-Scenario:
     runs-on: ubuntu-latest
@@ -60,20 +59,17 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
-          CHROMEDRIVER_VERSION=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
-          wget https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip
-          unzip chromedriver_linux64.zip
-          sudo mv chromedriver /usr/local/bin/
-          sudo chmod +x /usr/local/bin/chromedriver
 
       # Run Selenium Tests
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: '3.8'
 
       - name: Install Selenium dependencies
-        run: pip install selenium
+        run: |
+         pip install selenium
+         pip install -r requirements.txt
 
       - name: Test script
         run: |
