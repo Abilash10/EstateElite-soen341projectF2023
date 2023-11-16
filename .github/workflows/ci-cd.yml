@@ -56,9 +56,7 @@ jobs:
 
       # Setup Chrome
       - name: Setup Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
+        uses: browser-actions/setup-chrome@latest
 
       # Run Selenium Tests
       - name: Set up Python
@@ -68,8 +66,9 @@ jobs:
 
       - name: Install Selenium dependencies
         run: |
-         pip install selenium
-         pip install -r requirements.txt
+          pip install selenium==4.0.0
+          pip install webdriver-manager
+          pip install pytest
 
       - name: Test script
         run: |
