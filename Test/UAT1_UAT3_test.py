@@ -12,10 +12,10 @@ from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
 class TestTry(unittest.TestCase):
     def setUp(self):
-        options = FirefoxOptions()
-        options.headless = True
-        
-        self.driver = webdriver.Firefox(options=options)
+        # options = FirefoxOptions()
+        # options.headless = True
+
+        self.driver = webdriver.Firefox()  # (options=options)
         self.driver.implicitly_wait(10)
         self.base_url = "https://www.blazedemo.com/"
         self.verificationErrors = []
