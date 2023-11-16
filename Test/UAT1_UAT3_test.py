@@ -5,18 +5,18 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
-from selenium.webdriver.chrome.options import Options as ChromeOptions
 import unittest, time, re
 import logging
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
 
 class TestTry(unittest.TestCase):
     def setUp(self):
-        options = ChromeOptions()
-        # Add any Chrome options if necessary, e.g., running headless
-        # options.add_argument('--headless')
+        options = FirefoxOptions()
+        # Add any Firefox options if necessary, e.g., running headless
+        # options.headless = True
 
-        self.driver = webdriver.Chrome(options=options)
+        self.driver = webdriver.Firefox(options=options)
         self.driver.implicitly_wait(10)
         self.base_url = "https://www.blazedemo.com/"
         self.verificationErrors = []

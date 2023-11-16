@@ -54,9 +54,13 @@ jobs:
       - name: Wait for Client to Start
         run: sleep 10
 
-      # Setup Chrome
-      - name: Setup Chrome
-        uses: browser-actions/setup-chrome@latest
+      # # Setup Chrome ----------------
+      # - name: Setup Chrome
+      #   uses: browser-actions/setup-chrome@latest
+
+      # Setup Firefox
+      - name: Setup Firefox
+        uses: browser-actions/setup-firefox@latest
 
       # Run Selenium Tests
       - name: Set up Python
