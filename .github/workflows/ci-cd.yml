@@ -32,6 +32,8 @@ jobs:
       - name: Start Server
         run: |
           cd server/src
+          npm uninstall bcrypt
+          npm install bcrypt
           node index.js &
         continue-on-error: true
 
