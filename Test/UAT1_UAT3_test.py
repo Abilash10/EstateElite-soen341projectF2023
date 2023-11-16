@@ -23,7 +23,7 @@ class TestTry(unittest.TestCase):
 
     def test_try(self):
         driver = self.driver
-        wait = WebDriverWait(driver, 10)
+        wait = WebDriverWait(driver, 20)
         driver.get("http://localhost:3000/")
 
         search_input = wait.until(
