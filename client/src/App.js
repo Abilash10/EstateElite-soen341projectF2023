@@ -15,6 +15,7 @@ import Profile  from './pages/profile';
 import BrokerList from './pages/brokerList';
 import MyOffers from './pages/myoffers';
 import OfferManagement from './pages/offermanagement';
+import MortgageCalculator from './pages/mortgageCalculator';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
       <Header />
       <Routes> 
         <Route path='/' element={ <Home />} >  </Route>
+        <Route path='/mortgageCalculator' element={ <MortgageCalculator/> }></Route>
         <Route path='/BrokerList' element={ <BrokerList /> } > </Route>
         <Route 
           path='/Auth'
