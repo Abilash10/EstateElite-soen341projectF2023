@@ -76,4 +76,4 @@ jobs:
 
       - name: Test script
         run: |
-          python3 Test/UAT9_test.py
+          python3 Test/UAT1_UAT3_test.py
