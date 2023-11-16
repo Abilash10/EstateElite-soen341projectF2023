@@ -15,7 +15,7 @@ class TestTry(unittest.TestCase):
         # options = FirefoxOptions()
         # options.headless = True
 
-        self.driver = webdriver.Firefox()  # (options=options)
+        self.driver = webdriver.Firefox()  # (options=options)....skjs
         self.driver.implicitly_wait(10)
         self.base_url = "https://www.blazedemo.com/"
         self.verificationErrors = []
