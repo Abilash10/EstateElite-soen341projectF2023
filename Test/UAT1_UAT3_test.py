@@ -12,18 +12,18 @@ from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
 class TestTry(unittest.TestCase):
     def setUp(self):
-        # options = FirefoxOptions()
-        # options.headless = True
+        options = FirefoxOptions()
+        options.headless = True
 
-        self.driver = webdriver.Firefox()  # (options=options)....skjs
-        self.driver.implicitly_wait(10)
-        self.base_url = "https://www.blazedemo.com/"
+        self.driver = webdriver.Firefox(options=options)
+        self.driver.implicitly_wait(1)
+        self.base_url = "http://localhost:3000/"
         self.verificationErrors = []
         self.accept_next_alert = True
 
     def test_try(self):
         driver = self.driver
-        wait = WebDriverWait(driver, 30)
+        wait = WebDriverWait(driver, 10)
         driver.get("http://localhost:3000/")
 
         search_input = wait.until(
