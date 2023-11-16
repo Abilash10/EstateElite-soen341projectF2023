@@ -24,24 +24,41 @@ jobs:
     
     services:
       mongodb:
-        image: mongo:latest
+        image: mongo:4.4  # Using a specific version for consistency
         ports:
           - 27017:27017
         options: --health-cmd "mongo --version" --health-interval 10s --health-timeout 5s --health-retries 5
     
     steps:
       - uses: actions/checkout@v2
-      
+
+      # Cache Node modules
+      - name: Cache Node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # Cache Python packages
+      - name: Cache Python packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
       # Start Server
       - name: Install Server Dependencies
         run: |
           cd server
           npm install
+
       - name: Start Server
         run: |
           cd server/src
-          npm uninstall bcrypt
-          npm install bcrypt
           node index.js &
         continue-on-error: true
 
@@ -54,6 +71,7 @@ jobs:
         run: |
           cd client
           npm install
+
       - name: Start Client
         run: |
           cd client
@@ -63,10 +81,6 @@ jobs:
       # Wait for Client to Start
       - name: Wait for Client to Start
         run: sleep 10
-
-      # # Setup Chrome ----------------
-      # - name: Setup Chrome
-      #   uses: browser-actions/setup-chrome@latest
 
       # Setup Firefox
       - name: Setup Firefox
@@ -87,3 +101,9 @@ jobs:
       - name: Test script
         run: |
           python3 Test/UAT1_UAT3_test.py
+
+      # Cleanup
+      - name: Cleanup Resources
+        if: always()
+        run: |
+          echo "Cleanup any resources if needed"
