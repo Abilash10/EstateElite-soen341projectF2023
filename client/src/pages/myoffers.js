@@ -32,7 +32,12 @@ function MyOffers() {
                 setOffers(filteredOffers);
                 console.log(filteredOffers);
 
-                const propertyIDs = filteredOffers.map(offer => offer.property);
+                const propertyIDs = filteredOffers.reduce((acc, offer) => {
+                    if (!acc.includes(offer.property)) {
+                        acc.push(offer.property);
+                    }
+                    return acc;
+                }, []);
                 setPropertiesID(propertyIDs);
                 console.log(propertyIDs);
             } catch (err) {
