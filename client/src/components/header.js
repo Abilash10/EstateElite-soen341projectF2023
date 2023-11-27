@@ -41,7 +41,7 @@ function Header() {
                 : null }
 
                
-               { cookies.access_token ? <li> <Link to="/founders"> Founders </Link> </li> : null}
+               <li> <Link to="/founders"> Founders </Link> </li> 
                 
                 { cookies.access_token ? <li> <Link to="/profile"> Profile </Link> </li> : null}
 

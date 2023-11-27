@@ -1,5 +1,5 @@
 .main {
-    background-image: url("../assets/houseBackground.png");
+    background-image: url("../assets/HouseBackground.png");
     background-size: cover;
     background-repeat: repeat-y; /* Allow repetition vertically */
     background-position: center;
