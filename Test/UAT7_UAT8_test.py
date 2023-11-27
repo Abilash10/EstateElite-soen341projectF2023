@@ -55,7 +55,7 @@ try:
         )
     )
     search_input.clear()
-    search_input.send_keys("cool")
+    search_input.send_keys("testing")
     logging.info("Search criteria entered")
 
     # Click the search button

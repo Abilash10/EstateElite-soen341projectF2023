@@ -1,79 +1,79 @@
-# -*- coding: utf-8 -*-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
-import unittest, time, re
 import logging
-from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from selenium.webdriver.firefox.options import Options
 
+# Initialize logging
+logging.basicConfig(level=logging.INFO)
 
-class TestTry(unittest.TestCase):
-    def setUp(self):
-        options = FirefoxOptions()
-        options.headless = True
+# Run in headless mode for testing environment
+options = Options()
+options.add_argument("--headless")
 
-        self.driver = webdriver.Firefox(options=options)
-        self.driver.implicitly_wait(1)
-        self.base_url = "http://localhost:3000/"
-        self.verificationErrors = []
-        self.accept_next_alert = True
+# Initialize the WebDriver
+driver = webdriver.Firefox(options=options)
+wait = WebDriverWait(driver, 10)
 
-    def test_try(self):
-        driver = self.driver
-        wait = WebDriverWait(driver, 20)
-        driver.get("http://localhost:3000/")
+try:
+    # Navigate to the homepage
+    driver.get("http://localhost:3000/")  # Replace with sign-up page URL
+    logging.info("Navigated to the homepage.")
 
-        search_input = wait.until(
-            EC.presence_of_element_located(
-                (By.XPATH, '//input[@placeholder = "Search by location or address..."]')
-            )
+    # Find and click the 'Login/Register' link
+    login_register_link = wait.until(
+        EC.element_to_be_clickable(
+            (By.XPATH, "//a[normalize-space()='Login/Register']")
         )
-        search_input.click()
-        search_input.clear()
-        search_input.send_keys("cool")
-        driver.find_element(By.XPATH, '//*[text() = "Search"]').click()
+    )
+    login_register_link.click()
+    logging.info("Clicked the 'Login/Register' link.")
 
-        listings = wait.until(
-            EC.visibility_of_all_elements_located(
-                (By.CLASS_NAME, "searchedProperties_propertyCard__bIMx-")
-            )
-        )
-        first_listing = listings[0]
-        logging.info(f"Listing found: {first_listing.text}")
+    # Wait for and click the "Don't have an account?" option
+    Dont_have_a_account = wait.until(
+        EC.element_to_be_clickable((By.XPATH, "//a[@href='#']"))
+    )
+    Dont_have_a_account.click()
+    logging.info("Clicked 'Don't have an account?'")
 
-    def is_element_present(self, how, what):
-        try:
-            self.driver.find_element(by=how, value=what)
-        except NoSuchElementException as e:
-            return False
-        return True
+    # Wait and fill in the username and password fields
+    username_field = wait.until(EC.presence_of_element_located((By.ID, "username")))
+    username_field.send_keys("new_username")
+    logging.info("Filled in the username.")
+    password_field = wait.until(EC.presence_of_element_located((By.ID, "password")))
+    password_field.send_keys("new_password")
+    logging.info("Filled in the password.")
 
-    def is_alert_present(self):
-        try:
-            self.driver.switch_to.alert
-        except NoAlertPresentException as e:
-            return False
-        return True
+    # Submit the registration form
+    submit_registration_button = driver.find_element(
+        By.XPATH, "//button[@type='submit']"
+    )
+    submit_registration_button.click()
+    logging.info("Registration form submitted.")
 
-    def close_alert_and_get_its_text(self):
-        try:
-            alert = self.driver.switch_to.alert
-            alert_text = alert.text
-            if self.accept_next_alert:
-                alert.accept()
-            else:
-                alert.dismiss()
-            return alert_text
-        finally:
-            self.accept_next_alert = True
+    # Wait for the alert to be present
+    WebDriverWait(driver, 10).until(EC.alert_is_present())
 
-    def tearDown(self):
-        self.driver.quit()
-        self.assertEqual([], self.verificationErrors)
+    # Switch to the alert
+    alert = driver.switch_to.alert
 
+    # Validate the alert's text
+    assert "registration completed! Now login." in alert.text
+    logging.info("Alert shows the expected success message.")
 
-if __name__ == "__main__":
-    unittest.main()
+    # You can now accept the alert which is equivalent to clicking 'OK'
+    alert.accept()
+
+except NoAlertPresentException as e:
+    logging.error(f"No alert present: {e}")
+    raise
+except Exception as e:
+    logging.error(f"An error occurred: {e}")
+    raise
+
+finally:
+    # Close the WebDriver
+    driver.quit()
+    logging.info("WebDriver closed.")
