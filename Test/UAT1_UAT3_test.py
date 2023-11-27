@@ -4,7 +4,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoAlertPresentException
 import logging
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.options import Options
 
 # Initialize logging
 logging.basicConfig(level=logging.INFO)
@@ -14,12 +14,12 @@ options = Options()
 options.add_argument("--headless")
 
 # Initialize the WebDriver
-driver = webdriver.Chrome(options=options)
+driver = webdriver.Firefox(options=options)
 wait = WebDriverWait(driver, 10)
 
 try:
     # Navigate to the homepage
-    driver.get("http://localhost:3000/")  # Replace with your sign-up page URL
+    driver.get("http://localhost:3000/")  # Replace with sign-up page URL
     logging.info("Navigated to the homepage.")
 
     # Find and click the 'Login/Register' link
