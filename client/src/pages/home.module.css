@@ -1,11 +1,12 @@
 .main {
-    background-image: url("../assets/HouseBackground.png");
+    background-image: url("../assets/houseBackground.png");
     background-size: cover;
     background-repeat: repeat-y; /* Allow repetition vertically */
     background-position: center;
     background-attachment: fixed; /* Fix background position */
     min-height: 100vh; /* Ensure it fills the viewport height by default */
 }
+
 
 .searchContainer {
     display: flex;
