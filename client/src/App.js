@@ -15,7 +15,7 @@ import Profile  from './pages/profile';
 import BrokerList from './pages/brokerList';
 import MyOffers from './pages/myoffers';
 import OfferManagement from './pages/offermanagement';
-
+import Founders from './pages/founders';
 
 function App() {
   const [isBroker, setIsBroker] = useState(false);
@@ -44,6 +44,13 @@ function App() {
           element= {<OfferManagement />}
           >
           </Route>
+
+          <Route 
+          path='/Founders'
+          element= {<Founders />}
+          >
+          </Route>
+          
 
         <Route 
           path='/MyProperties'

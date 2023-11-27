@@ -1,0 +1,14 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-image: url("../assets/team.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  
+  .main > div {
+    flex-grow: 1;
+  }
