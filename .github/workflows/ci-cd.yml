@@ -3,11 +3,11 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - New_CI_CD
+      - Ktesting
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
-      - New_CI_CD
+      - Ktesting
   workflow_dispatch:
 
 jobs:
