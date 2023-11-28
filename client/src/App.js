@@ -16,6 +16,7 @@ import BrokerList from './pages/brokerList';
 import MyOffers from './pages/myoffers';
 import OfferManagement from './pages/offermanagement';
 import MortgageCalculator from './pages/mortgageCalculator';
+import Founders from './pages/founders';
 
 
 function App() {
@@ -46,6 +47,13 @@ function App() {
           element= {<OfferManagement />}
           >
           </Route>
+
+          <Route 
+          path='/Founders'
+          element= {<Founders />}
+          >
+          </Route>
+          
 
         <Route 
           path='/MyProperties'

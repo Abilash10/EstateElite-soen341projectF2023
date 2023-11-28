@@ -4,14 +4,11 @@ on:
   push:
     branches:
       - Ktesting
-      - main
-      - test
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
       - Ktesting
-      - main
-      - test
+  workflow_dispatch:
 
 jobs:
   display-info:
@@ -21,12 +18,20 @@ jobs:
         run: |
           echo "Commit Message: ${{ github.event.head_commit.message }}"
           echo "Pusher Name: ${{ github.actor }}"
-  
-  Sprint-2-Scenario:
+
+  Test-Scenario:
     runs-on: ubuntu-latest
+    
+    services:
+      mongodb:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+        options: --health-cmd "mongo --version" --health-interval 10s --health-timeout 5s --health-retries 5
+    
     steps:
       - uses: actions/checkout@v2
-
+      
       # Start Server
       - name: Install Server Dependencies
         run: |
@@ -59,152 +64,26 @@ jobs:
       - name: Wait for Client to Start
         run: sleep 10
 
-      - name: Setup Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-          CHROMEDRIVER_VERSION=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
-          wget https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip
-          unzip chromedriver_linux64.zip
-          sudo mv chromedriver /usr/local/bin/
-          sudo chmod +x /usr/local/bin/chromedriver
+      # # Setup Chrome ----------------
+      # - name: Setup Chrome
+      #   uses: browser-actions/setup-chrome@latest
+
+      # Setup Firefox
+      - name: Setup Firefox
+        uses: browser-actions/setup-firefox@latest
 
       # Run Selenium Tests
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: '3.8'
 
       - name: Install Selenium dependencies
-        run: pip install selenium
+        run: |
+          pip install selenium==4.0.0
+          pip install webdriver-manager
+          pip install pytest
 
-      - name: Register user Test
-        run: |
-          python3 Test/UAT1_UAT3_test.py
-  
-      - name: Login user Test
-        run: |
-          python3 Test/UAT2_P1_test.py
-          python3 Test/UAT2_P2_UAT4_test.py
-        
-      - name: Check header consistansy and header menu
-        run: |
-          python3 Test/UAT5_UAT6_test.py
-  
-      - name: Check Basic search and visit request
-        run: |
-          python3 Test/UAT7_UAT8_test.py
-
-          
-  Sprint-3-Scenario:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        
-      # Start Server
-      - name: Install Server Dependencies
-        run: |
-          cd server
-          npm install
-      - name: Start Server
-        run: |
-          cd server/src
-          node index.js &
-        continue-on-error: true
-        
-      # Wait for Server to Start
-      - name: Wait for Server to Start
-        run: sleep 10
-        
-      # Start Client
-      - name: Install Client Dependencies
-        run: |
-          cd client
-          npm install
-      - name: Start Client
-        run: |
-          cd client
-          npm start &
-        continue-on-error: true
-        
-      # Wait for Client to Start
-      - name: Wait for Client to Start
-        run: sleep 10
-        
-      # Run Selenium Tests
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
-        
-      - name: Install Selenium dependencies
-        run: pip install selenium
-  
-      - name: Setup Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-        
-      - name: Register user Test --
-        run: |
-          python3 Test/UAT1_UAT3_test.py
-      
-      - name: Search Broker test
-        run: |
-          python3 Test/UAT9_test.py
-
-  #write a third job to that settup the chrome driver and run the selenium tests Test/UAT1_UAT3_test.py
-  Test-Scenario:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      
-      # Start Server
-      - name: Install Server Dependencies
-        run: |
-          cd server
-          npm install
-
-      - name: Start Server
-        run: |
-          cd server/src
-          node index.js &
-        continue-on-error: true
-
-      # Wait for Server to Start
-      - name: Wait for Server to Start
-        run: sleep 10
-
-      # Start Client
-      - name: Install Client Dependencies
-        run: |
-          cd client
-          npm install
-
-      - name: Start Client
-        run: |
-          cd client
-          npm start &
-        continue-on-error: true
-
-      # Wait for Client to Start
-      - name: Wait for Client to Start
-        run: sleep 10
-
-      # Run Selenium Tests
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
-
-      - name: Install Selenium dependencies
-        run: pip install selenium
-
-      - name: Setup Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-
-      - name: Register user Test
+      - name: Test script
         run: |
           python3 Test/UAT1_UAT3_test.py

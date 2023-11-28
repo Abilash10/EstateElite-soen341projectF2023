@@ -41,9 +41,7 @@ function Header() {
                 : null }
 
                
-                <li>Team</li>
-
-                <li>Contact</li>
+               <li> <Link to="/founders"> Founders </Link> </li> 
                 
                 { cookies.access_token ? <li> <Link to="/profile"> Profile </Link> </li> : null}
 
