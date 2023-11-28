@@ -1,6 +1,6 @@
 import styles from "./header.module.css";
 import { Link } from "react-router-dom";
-import logoImg from "../assets/EElogo.png";
+import logoImg from "../assets/Estate Elite.png";
 import { useCookies } from "react-cookie";
 import useLogout from "../hooks/logoutUser";
 
