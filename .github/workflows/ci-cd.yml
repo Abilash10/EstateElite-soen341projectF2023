@@ -19,76 +19,89 @@ jobs:
           echo "Commit Message: ${{ github.event.head_commit.message }}"
           echo "Pusher Name: ${{ github.actor }}"
 
-  Test-Scenario:
+  Unit_Test:
     runs-on: ubuntu-latest
-    
-    services:
-      mongodb:
-        image: mongo:latest
-        ports:
-          - 27017:27017
-        options: --health-cmd "mongo --version" --health-interval 10s --health-timeout 5s --health-retries 5
-    
     steps:
       - uses: actions/checkout@v2
-      
-      # Start Server
-      - name: Install Server Dependencies
-        run: |
-          cd server
-          npm install
-      - name: Start Server
-        run: |
-          cd server/src
-          npm uninstall bcrypt
-          npm install bcrypt
-          node index.js &
-        continue-on-error: true
-
-      # Wait for Server to Start
-      - name: Wait for Server to Start
-        run: sleep 10
-
-      # Start Client
-      - name: Install Client Dependencies
+      - name: Install Dependencies
         run: |
           cd client
           npm install
-      - name: Start Client
-        run: |
-          cd client
-          npm start &
-        continue-on-error: true
-
-      # Wait for Client to Start
-      - name: Wait for Client to Start
-        run: sleep 10
-
       - name: Run Unit Tests
         run: |
           cd client
-          npm test
+          npm test  -- --coverage --no-cache
 
-      # # Setup Chrome ----------------
-      # - name: Setup Chrome
-      #   uses: browser-actions/setup-chrome@latest
+  # Test-Scenario:
+  #   runs-on: ubuntu-latest
+    
+  #   services:
+  #     mongodb:
+  #       image: mongo:latest
+  #       ports:
+  #         - 27017:27017
+  #       options: --health-cmd "mongo --version" --health-interval 10s --health-timeout 5s --health-retries 5
+    
+  #   steps:
+  #     - uses: actions/checkout@v2
+      
+  #     # Start Server
+  #     - name: Install Server Dependencies
+  #       run: |
+  #         cd server
+  #         npm install
+  #     - name: Start Server
+  #       run: |
+  #         cd server/src
+  #         npm uninstall bcrypt
+  #         npm install bcrypt
+  #         node index.js &
+  #       continue-on-error: true
 
-      # Setup Firefox
-      - name: Setup Firefox
-        uses: browser-actions/setup-firefox@latest
+  #     # Wait for Server to Start
+  #     - name: Wait for Server to Start
+  #       run: sleep 10
 
-      # Run Selenium Tests
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.8'
+  #     # Start Client
+  #     - name: Install Client Dependencies
+  #       run: |
+  #         cd client
+  #         npm install
+  #     - name: Start Client
+  #       run: |
+  #         cd client
+  #         npm start &
+  #       continue-on-error: true
 
-      - name: Install Selenium dependencies
-        run: |
-          pip install selenium==4.0.0
-          pip install webdriver-manager
-          pip install pytest
+  #     # Wait for Client to Start
+  #     - name: Wait for Client to Start
+  #       run: sleep 10
 
-      - name: Test script
-        run: |
-          python3 Test/UAT1_UAT3_test.py
+  #     - name: Run Unit Tests
+  #       run: |
+  #         cd client
+  #         npm test
+
+  #     # # Setup Chrome ----------------
+  #     # - name: Setup Chrome
+  #     #   uses: browser-actions/setup-chrome@latest
+
+  #     # Setup Firefox
+  #     - name: Setup Firefox
+  #       uses: browser-actions/setup-firefox@latest
+
+  #     # Run Selenium Tests
+  #     - name: Set up Python
+  #       uses: actions/setup-python@v2
+  #       with:
+  #         python-version: '3.8'
+
+  #     - name: Install Selenium dependencies
+  #       run: |
+  #         pip install selenium==4.0.0
+  #         pip install webdriver-manager
+  #         pip install pytest
+
+  #     - name: Test script
+  #       run: |
+  #         python3 Test/UAT1_UAT3_test.py
