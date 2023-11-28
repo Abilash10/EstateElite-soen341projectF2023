@@ -14,7 +14,7 @@ options = Options()
 options.add_argument("--headless")
 
 # Initialize the WebDriver
-driver = webdriver.Chrome(options=options)
+driver = webdriver.Firefox(options=options)
 wait = WebDriverWait(driver, 10)
 
 try:
