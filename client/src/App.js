@@ -15,7 +15,9 @@ import Profile  from './pages/profile';
 import BrokerList from './pages/brokerList';
 import MyOffers from './pages/myoffers';
 import OfferManagement from './pages/offermanagement';
+import MortgageCalculator from './pages/mortgageCalculator';
 import Founders from './pages/founders';
+
 
 function App() {
   const [isBroker, setIsBroker] = useState(false);
@@ -25,6 +27,7 @@ function App() {
       <Header />
       <Routes> 
         <Route path='/' element={ <Home />} >  </Route>
+        <Route path='/mortgageCalculator' element={ <MortgageCalculator/> }></Route>
         <Route path='/BrokerList' element={ <BrokerList /> } > </Route>
         <Route 
           path='/Auth'
