@@ -64,6 +64,11 @@ jobs:
       - name: Wait for Client to Start
         run: sleep 10
 
+      - name: Run Unit Tests
+        run: |
+          cd client
+          npm test
+
       # # Setup Chrome ----------------
       # - name: Setup Chrome
       #   uses: browser-actions/setup-chrome@latest
