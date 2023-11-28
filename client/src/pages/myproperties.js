@@ -104,12 +104,7 @@ function MyProperties() {
                                 </button>
 
                             </p>
-                            <p> Type: {property.type} </p>
-                            <p> Bathrooms: {property.bathrooms} </p>
-                            <p>Bedrooms: {property.bedrooms}</p>
-                            <p>Parking: {property.parking} </p>
-                            { property.pool ? <p> Pool </p> : null}
-                            <p>Visits: {property.visitRequests.length} </p>
+                            <p> Type: {property.type}  | Bathrooms: {property.bathrooms}  | Bedrooms: {property.bedrooms} | Parking: {property.parking} { property.pool ?   <> | Pool </> : null} | Visits: {property.visitRequests.length} </p>
                         </div>
                         <img src={property.imageUrl} alt={property.address} />
                         <br/>
