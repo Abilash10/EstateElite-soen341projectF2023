@@ -77,7 +77,7 @@ function MyProperties() {
             <ul className={styles.borderedLi } style={{listStyleType:'none'}} > 
                 {properties.map((property) => ( property.userOwner == userID ? 
                     <li key={property._id}>
-                        <div> 
+                        <div className={styles.propertyInfo} > 
                             <h2> {property.address} </h2>
                         </div> 
                         <div className="info"> 
@@ -87,11 +87,12 @@ function MyProperties() {
                                     editId === property._id ? (
                                         <>
                                             <input
+                                                className={styles.inputField}
                                                 type="number"
                                                 value={newPrice}
                                                 onChange={handlePriceChange}
                                             />
-                                            <button onClick={handleUpdate}> Update </button>
+                                            <button className={styles.updateButton} onClick={handleUpdate}> Update </button>
                                         </>
                                     ) : (property.price)
                                 } 
@@ -103,12 +104,7 @@ function MyProperties() {
                                 </button>
 
                             </p>
-                            <p> Type: {property.type} </p>
-                            <p> Bathrooms: {property.bathrooms} </p>
-                            <p>Bedrooms: {property.bedrooms}</p>
-                            <p>Parking: {property.parking} </p>
-                            { property.pool ? <p> Pool </p> : null}
-                            <p>Visits: {property.visitRequests.length} </p>
+                            <p> Type: {property.type}  | Bathrooms: {property.bathrooms}  | Bedrooms: {property.bedrooms} | Parking: {property.parking} { property.pool ?   <> | Pool </> : null} | Visits: {property.visitRequests.length} </p>
                         </div>
                         <img src={property.imageUrl} alt={property.address} />
                         <br/>

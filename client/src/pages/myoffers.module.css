@@ -1,18 +1,74 @@
-.borderedLi li {
-    border: 1px solid black;
-    padding: 10px;
-    margin: 5px;
-    margin-right: 40px;
-    border-radius: 4px;
+.borderedLi {
     list-style-type: none;
-  }
-  
-.editButton {
-    float: right;
-    font-size: 20px;
+    padding: 0;
 }
 
+.borderedLi li {
+    border: 1px solid #ddd;
+    padding: 20px;
+    width: 1000px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.borderedLi li:hover {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.offerDetail {
+    margin-bottom: 15px;
+}
+
+.offerDetail h2 {
+    color: #333;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+.offerDetail img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 20px;
+    border-radius: 4px;
+    max-height: 300px; 
+    object-fit: cover; 
+}
+
+.offerDetail button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.offerDetail button:hover {
+    background-color: #c82333;
+    color: white;
+}
+
+
 .deleteButton {
-    float: right;
-    font-size: 20px;
+    background-color: #dc3545;
+}
+
+.deleteButton:hover {
+    background-color: #c82333;
+}
+
+
+.offersContainer {
+    min-height: 60vh; 
+    padding: 20px;
 }
