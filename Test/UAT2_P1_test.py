@@ -5,7 +5,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoAlertPresentException
 from selenium.webdriver.firefox.options import Options
 import logging
-from selenium.webdriver.chrome.options import Options
 
 # Initialize logging
 logging.basicConfig(level=logging.INFO)
@@ -56,7 +55,7 @@ try:
 
     # Validate the alert's text
     assert "Username does not exist!" in alert.text
-    logging.info("Alert with the correct text found.")
+    logging.info(f"Alert {alert.text} found.")
 
     # Accept the alert
     alert.accept()

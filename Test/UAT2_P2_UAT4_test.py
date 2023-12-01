@@ -5,7 +5,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.firefox.options import Options
 import logging
-from selenium.webdriver.chrome.options import Options
 
 # Initialize logging
 logging.basicConfig(level=logging.INFO)

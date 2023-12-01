@@ -24,7 +24,7 @@ wait = WebDriverWait(driver, 10)
 
 try:
     # Navigate to the homepage
-    driver.get("http://localhost:3002/")
+    driver.get("http://localhost:3000/")
     logging.info("Navigated to the homepage.")
 
     # Click the Login button

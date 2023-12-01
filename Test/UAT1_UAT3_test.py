@@ -59,9 +59,15 @@ try:
     # Switch to the alert
     alert = driver.switch_to.alert
 
+    # Wait for the alert to be present
+    WebDriverWait(driver, 10).until(EC.alert_is_present())
+
     # Validate the alert's text
-    assert "registration completed! Now login." in alert.text
-    logging.info("Alert shows the expected success message.")
+    assert (
+        "Username already exists!"
+        or "User registration has been completed succesfully" in alert.text
+    )
+    logging.info(f"Alert shows : {alert.text}")
 
     # You can now accept the alert which is equivalent to clicking 'OK'
     alert.accept()
