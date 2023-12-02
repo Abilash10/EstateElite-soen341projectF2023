@@ -16,15 +16,13 @@ app.use("/properties",propertiesRouter);
 app.use("/offers",offersRouter);
 app.use("/broker",brokerRouter);
 
-//Don't put password directly in here, we will secure using github secrets
+//TODO: Transition to github secrets to hide the password
 mongoose.connect(   //connecting our database to the code
     "mongodb+srv://eeteam:EstateElite123456@estate-elite.ar82uwe.mongodb.net/estate-elite?retryWrites=true&w=majority",
-{
-useNewUrlParser:true,
-useUnifiedTopology:true,
-
-}
-
+    {
+    useNewUrlParser:true,
+    useUnifiedTopology:true,
+    }
 );
 
 

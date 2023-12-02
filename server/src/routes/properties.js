@@ -135,8 +135,4 @@ router.get("/savedProperties/ids", async (request, response) => {
 
 });
 
-
-
-
-
 export { router as propertiesRouter };
