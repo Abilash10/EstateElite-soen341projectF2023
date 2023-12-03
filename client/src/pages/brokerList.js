@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SearchedBrokers from "../components/searchedBrokers.js";
 import axios from "axios";
-import styles from "./home.module.css";
+import styles from "./brokerList.module.css";
 
 
 
@@ -19,6 +19,12 @@ function BrokerList() {
       }
     }
 
+    const handleKeyPress = (e) => {
+      if (e.key === 'Enter') {
+        handleSearch();
+      }
+    }
+
     return (
       <div className={styles.main}>
           <div className={styles.searchContainer}>
@@ -29,6 +35,7 @@ function BrokerList() {
               name="searchBrokers" 
               value={searchValue}
               onChange={e => setSearchValue(e.target.value)} 
+              onKeyPress={handleKeyPress}
               />
               <div className={styles.buttonContainer}>
                   {/* <button className={styles.advancedFiltersBtn} type="submit">Advanced Filters</button> */}

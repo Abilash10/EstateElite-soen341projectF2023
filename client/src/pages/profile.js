@@ -1,9 +1,11 @@
+// Profile.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useGetUserID } from "../hooks/useGetUserID";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { getUserName } from "../hooks/getUserName";
+import styles from './profile.module.css';
 
 function Profile() {
   const userID = useGetUserID();
@@ -59,24 +61,22 @@ function Profile() {
     getUsername();
   }, []);
 
-      function changePassword(e) {
-        const newPassword = document.getElementById("newPassword").value;
-    
-        const token = localStorage.getItem("token"); // assuming you store the JWT in local storage
-    
-        axios.post("http://localhost:3001/auth/changePassword", { newPassword }, {
-            headers: {
-                'Authorization': token
-            }
-        }).then(response => {
-            // Handle success
-            alert("password changed!");
-            window.location.pathname = '/';
-        }).catch(error => {
-            // Handle error
-            alert("error changing password");
-        });
-    }
+  function changePassword(e) {
+    const newPassword = document.getElementById("newPassword").value;
+
+    const token = localStorage.getItem("token");
+
+    axios.post("http://localhost:3001/auth/changePassword", { newPassword }, {
+        headers: {
+            'Authorization': token
+        }
+    }).then(response => {
+        alert("password changed!");
+        window.location.pathname = '/';
+    }).catch(error => {
+        alert("error changing password");
+    });
+  }
 
   const deleteAccount = async () => {
     if (!window.confirm("Are you sure you want to delete your account?")) {
@@ -103,34 +103,34 @@ function Profile() {
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="surname">Surname: </label>
-            <input type="text" id="surname" name="surname" value={broker.surname} onChange={handleChange} required />
+            <input type="text" id="surname" name="surname" value={broker.surname} onChange={handleChange} required className={styles.inputField} />
           </div>
           <div>
-                   <label htmlFor="name">Name: </label>
-                   <input type="text" id="name" name="name" value={broker.name} onChange={handleChange} required />
-                 </div>
-                 <div>
-                   <label htmlFor="email">Email: </label>
-                   <input type="text" id="email" name="email" value={broker.email} onChange={handleChange} required />
-                 </div>
-                 <div>
-                   <label htmlFor="phoneNumber">Phone Number: </label>
-                   <input type="text" id="phoneNumber" name="phoneNumber" value={broker.phoneNumber} onChange={handleChange} required />
-                 </div>
-                 <div>
-                   <label htmlFor="companyName">Company Name: </label>
-                   <input type="text" id="companyName" name="companyName" value={broker.companyName} onChange={handleChange} required />
-                 </div>
-                 <div>
-                   <label htmlFor="officeAddress">Office Address: </label>
-                   <input type="text" id="officeAddress" name="officeAddress" value={broker.officeAddress} onChange={handleChange} required />
-                 </div>
-                 <div>
-                     <label htmlFor="yearsOfExperience">Years of Experience: </label>
-                     <input type="number" id="yearsOfExperience" name="yearsOfExperience" value={broker.yearsOfExperience} onChange={handleChange} required />
-                 </div>
-          <button type="submit">Submit</button>
-          <button type="button" onClick={() => setEditing(false)}>
+            <label htmlFor="name">Name: </label>
+            <input type="text" id="name" name="name" value={broker.name} onChange={handleChange} required className={styles.inputField} />
+          </div>
+          <div>
+            <label htmlFor="email">Email: </label>
+            <input type="text" id="email" name="email" value={broker.email} onChange={handleChange} required className={styles.inputField} />
+          </div>
+          <div>
+            <label htmlFor="phoneNumber">Phone Number: </label>
+            <input type="text" id="phoneNumber" name="phoneNumber" value={broker.phoneNumber} onChange={handleChange} required className={styles.inputField} />
+          </div>
+          <div>
+            <label htmlFor="companyName">Company Name: </label>
+            <input type="text" id="companyName" name="companyName" value={broker.companyName} onChange={handleChange} required className={styles.inputField} />
+          </div>
+          <div>
+            <label htmlFor="officeAddress">Office Address: </label>
+            <input type="text" id="officeAddress" name="officeAddress" value={broker.officeAddress} onChange={handleChange} required className={styles.inputField} />
+          </div>
+          <div>
+            <label htmlFor="yearsOfExperience">Years of Experience: </label>
+            <input type="number" id="yearsOfExperience" name="yearsOfExperience" value={broker.yearsOfExperience} onChange={handleChange} required className={styles.inputField} />
+          </div>
+          <button type="submit" className={styles.submitBtn}>Submit</button>
+          <button type="button" onClick={() => setEditing(false)} className={styles.cancelBtn}>
             Cancel
           </button>
         </form>
@@ -138,12 +138,13 @@ function Profile() {
         <div>
           <h3> Username: {username}</h3>
           <h3> Change Password:&nbsp;
-                 <input type="password" id="newPassword" placeholder="Enter new password" />
-                 <button onClick={changePassword}> Submit </button>
+            <input type="password" id="newPassword" placeholder="Enter new password" className={styles.inputField} />
+            <button onClick={changePassword} className={styles.changePasswordBtn}> Submit </button>
           </h3>
-          <button onClick={deleteAccount}>Delete Account</button>
-          {localStorage.getItem("userType")=="broker"?
-            <button onClick={() => setEditing(true)}>Edit Account</button>:null} 
+          <button onClick={deleteAccount} className={styles.deleteAccountBtn}>Delete Account</button>
+          {localStorage.getItem("userType") === "broker" ? (
+            <button onClick={() => setEditing(true)} className={styles.editAccountBtn}>Edit Account</button>
+          ) : null} 
         </div>
       )}
     </div>
