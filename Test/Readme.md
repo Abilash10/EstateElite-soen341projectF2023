@@ -1,9 +1,3 @@
 # All User acceptance test will be transfered here  once All the scenario are properly implemented with sellenium 
-- per Peno
-> UAT1 and UAT3 are in the same file 
 
-> UAT2 is splitted into 2 Scenario and is combined to UAT4
-
-> UAT5 and UAT6 are combined
-
-> UAT7 and UAT8 are combined
+Acceptance testing, or end-to-end testing, is performed to ascertain that the system as a whole is functioning as intended. In our setup, Python scripts facilitated by Selenium and Blazemeter are used to simulate user interactions, adhering to the user acceptance criteria. While the integration of this level of testing into CI/CD pipelines is challenging due to its complexity and time consumption, local execution via a Makefile in the common test directory offers a straightforward solution. However, this method's manual nature is a limitation that leads to less frequent feedback.
