@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import {useGetUserID} from '../hooks/useGetUserID';
 import { getToken } from "../hooks/getToken";
-
+import styles from './offermanagement.module.css';
 
 function OfferManagement() {
 
@@ -134,32 +134,34 @@ function OfferManagement() {
     }
 
     return (
-        <div>
-            <h1> Offers </h1>
-            <ul> 
+        <div className={styles.container} >
+            <h1 className={styles.header} > Offers </h1>
+            <ul className={styles.offerList} > 
                 { offers.map((offer) => 
 
                 {const property = properties.find(p => p._id === offer.property);
                 
                     return (
-                        <li key={offer._id}>
+                        <li className={styles.offerItem} key={offer._id}>
                             {property && (
-                                <div> 
+                                <div className={styles.offerDetails} > 
                                     <p>Property: {property.address}</p>
                                     <p> Offer: $ {offer.amount} </p>
                                     {offer.status == 'pending' ? 
                                             (<>
                                                 <button
+                                                    className={`${styles.button} ${styles.accept}`}
                                                     onClick={() => handleAccept(offer._id)}
                                                 >Accept </button>
                                                 <button
+                                                    className={`${styles.button} ${styles.reject}`}
                                                     onClick={() => handleReject(offer._id)}
                                                 > Rejected </button>
                                             </>)
                                              : (
                                                 <> 
                                                 <p>Status: {offer.status} </p>
-                                                <a href="#" onClick={() => handleUndo(offer._id)}> Have you changed your mind about the offer ? Click here to undo </a>
+                                                <a href="#" className={styles.undoLink} onClick={() => handleUndo(offer._id)}> Have you changed your mind about the offer ? Click here to undo </a>
                                                 </>
                                              )
                                     }

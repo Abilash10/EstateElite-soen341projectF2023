@@ -1,0 +1,28 @@
+~ Meeting Minutes (2) ~
+
+Date: Sat 4th November, 2023
+
+Time: 12:00 pm to 3:00 pm 
+
+Location: Online
+
+Present: Nabih El-helou, Penoelo Thibeaud
+
+Absent: Kilian Hedou, Kateryna Sizova, Abilash Sasitharan, Joerexpradeepan Thambaiah
+
+Agenda:
+
+    Work on frontend and backend to complete our assigned task (Acceptance and resfusal for offers)
+        - Finish function to modify offer status
+        - Implement it in the interface 
+        - Start working on the Offer Management page
+
+Minutes:
+
+    Penoelo was assigned to create a function on the back-end to change the status state of an offer to accepted or declined. Additionally, was assigned to create a function that deletes an offer from the database.
+    Nabih was assigned to work on the "my offers" page and connect it to the backend once Penoelo creates the function on the back-end.
+
+    Penoelo finished his work on the back-end which allowed Nabih to connect the app to the database and display the offers. Penoelo also addded the delete function on the back-end.
+    Nabih tested the "my offers" page and then, started creating a temporary Offer Management page for brokers.
+
+    Nabih was then assigned to  work on the accept/reject functionalities in the next few days

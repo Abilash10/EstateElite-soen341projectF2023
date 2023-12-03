@@ -1,0 +1,45 @@
+.wrapper {
+    min-height: 300px;
+    max-width: 600px;
+    background-color: rgba(0, 0, 0, 0.395);
+    border-radius: 30px;
+    padding: 30px;
+    margin: 0 auto;
+  
+    @media (max-width: 300px) {
+      padding: 10px;
+    }
+  }
+  
+  .title {
+    font-family: 'Greycliff CF', sans-serif;
+    color: #ffffff;
+    line-height: 1;
+  }
+  
+  .descriptionContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .description {
+    color: #ffffff;
+    max-width: 600px;
+    font-weight: bold;
+  
+    @media (max-width: 700px) {
+      max-width: 100%;
+    }
+  }
+  
+  .contactInfo {
+    color: #ffffff;
+    max-width: 300px;
+    margin: 0 auto;
+  
+    @media (max-width: 600px) {
+      max-width: 100%;
+    }
+  }

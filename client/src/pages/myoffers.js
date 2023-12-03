@@ -32,7 +32,12 @@ function MyOffers() {
                 setOffers(filteredOffers);
                 console.log(filteredOffers);
 
-                const propertyIDs = filteredOffers.map(offer => offer.property);
+                const propertyIDs = filteredOffers.reduce((acc, offer) => {
+                    if (!acc.includes(offer.property)) {
+                        acc.push(offer.property);
+                    }
+                    return acc;
+                }, []);
                 setPropertiesID(propertyIDs);
                 console.log(propertyIDs);
             } catch (err) {
@@ -101,14 +106,17 @@ function MyOffers() {
         <div> 
             <h1> My offers </h1>
             <ul className={styles.borderedLi}  > 
-             { offers.map((offer) =>  
+             { offers.length == 0 ? <div className={styles.offersContainer}>
+                    <h2> You have not made any offers yet </h2>
+                
+             </div> : offers.map((offer) =>  
             
             <li key={offer._id}> 
                
                 { properties.map((property) => 
                 
                 offer.property == property._id ? //IMPORTANT: small bug when a client makes multiple offers to the same property a bugg occurs where it duplicates images
-                <div> 
+                <div className={styles.offerDetail}> 
 
                     <h2>Address : {property.address} </h2>
 

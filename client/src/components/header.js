@@ -24,7 +24,7 @@ function Header() {
                 { cookies.access_token && window.localStorage.getItem("userType") === "broker" ? <li>
                     <Link to="/addProperty"> Add </Link> </li> : null
                 }
-
+                { userType != 'broker' ? <li><Link to="/mortgageCalculator"> Mortgage Calculator </Link></li> : null }
                 { userType == 'broker' ? <li> <Link to="/MyProperties"> My Properties </Link></li> : null }
 
 
@@ -43,9 +43,7 @@ function Header() {
                 : null }
 
                
-                <li>Team</li>
-
-                <li>Contact</li>
+               <li> <Link to="/founders"> Founders </Link> </li> 
                 
                 { cookies.access_token ? <li> <Link to="/profile"> Profile </Link> </li> : null}
 

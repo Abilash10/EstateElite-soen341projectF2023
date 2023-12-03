@@ -1,0 +1,23 @@
+~ Meeting Minutes (4) ~
+
+Date: Thursday November 2, 2023
+
+Time: 1pm to 4pm
+
+Location: JMSB, 6th floor
+
+Present: Kilian Hedou, Kateryna Sizova
+
+Absent: Abilash Sasitharan, Joerexpradeepan Thambaiah, Nabih El-helou, Penoelo Thibeaud
+
+Agenda:
+
+    Work on the assigned task (create an offer submission option for the users) 
+
+Minutes:
+
+We added a button to searched property cards: ‘make offer’
+We ensured ‘make offer’ button pops up a modal/form where the user enters a number and submits
+We created new object in the database: offers
+We defined structure of offers in backend
+We ensured that submitting an offer creates an offer in the database

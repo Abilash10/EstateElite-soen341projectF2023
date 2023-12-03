@@ -12,12 +12,17 @@ const Register = (props) => {
     const onSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post("http://localhost:3001/auth/register", {
+            const response = await axios.post("http://localhost:3001/auth/register", {
                 username, 
                 password,
                 userType
             });
-            alert("registration completed! Now login.")
+            if (response.data.message === "sameusername") {
+            alert("Username already exists!");
+        }
+            else {
+            alert("User registration has been completed succesfully");
+            }
         } catch (err) {
             console.error(err);
         }

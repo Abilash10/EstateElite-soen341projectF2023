@@ -3,8 +3,6 @@ import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import { UserModel } from "../models/Users.js";
 
-//json is a data type used to send data from a server to a webpage
-
 const router = express.Router()
 export const verifyToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -13,7 +11,7 @@ export const verifyToken = (req, res, next) => {
       if (err) {
         return res.sendStatus(403);
       }
-      req.user = user; // attach the user info to the request object
+      req.user = user; //attach the user info to the request object
       next();
     });
   } else {
@@ -41,7 +39,7 @@ router.post("/register", async (request, response) => {
   const user = await UserModel.findOne({ username: username });  //confirming user name exists and if that's the case, we're asigning a user object 
 
   if (user) {
-    return response.json({ message: " This username already exists. Please enter a different username! " })
+    return response.json({ message: "sameusername" });
   }
 
   const hashedPassword = await bcrypt.hash(password, 10); // hashing the password

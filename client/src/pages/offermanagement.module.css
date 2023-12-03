@@ -1,0 +1,115 @@
+
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .offerList {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .offerItem {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    background-color: #f8f8f8;
+  }
+  
+  .offerItem:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  .offerDetails {
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+  
+  .offerDetails p {
+    margin: 5px 0;
+    color: #333;
+  }
+  
+  .offerDetails p.status {
+    font-weight: bold;
+  }
+  
+  .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #45a049;
+  }
+  
+  .button.reject {
+    background-color: #f44336; /* Red */
+  }
+  
+  .button.reject:hover {
+    background-color: #d32f2f;
+  }
+  
+  .button.undo {
+    background-color: #008CBA; /* Blue */
+  }
+  
+  .button.undo:hover {
+    background-color: #007ba7;
+  }
+  
+  .undoLink {
+    color: #008CBA;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 5px;
+    display: inline-block;
+    margin-top: 10px;
+  }
+  
+  .undoLink:hover {
+    text-decoration: none;
+  }
+  
+  /* Media queries for responsive design */
+  /* @media (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+  
+    .offerItem {
+      width: auto;
+      padding: 10px;
+    }
+  
+    .offerDetails {
+      font-size: 14px;
+    }
+  
+    .button {
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+  }
+   */

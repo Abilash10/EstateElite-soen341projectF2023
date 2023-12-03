@@ -2,7 +2,7 @@ User Stories
 
 1. 
 
-User story: 
+User story (7): 
 As a user, I want to be able to securely create an account using my email as an username and a password to protect my personal information. 
 
 Acceptance Criteria:
@@ -16,7 +16,7 @@ High
 
 2. 
 
-User story: 
+User story(12): 
 As a homebuyer or a property renter, I want to be able to narrow down the property search based on multiple criteria to ensure that the listings I see match my preferences. 
 
 Acceptance Criteria:
@@ -31,7 +31,7 @@ High
 
 3.
 
-User story: 
+User story(10): 
 As a homebuyer or a property renter, I want to be able to see the broker's information within each property's description so I can be able to contact them and/or request a visit through the platform directly.
 
 Acceptance criteria: 
@@ -45,7 +45,7 @@ High for the broker's information. Medium for the visit request through the webs
 
 4. 
 
-As a broker, I want to be able to create, read, update, and/or delete listings to ensure that the properties shown are up to date. 
+As a broker, I want to be able to create, read, update, and/or delete listings to ensure that the properties shown are up to date.(7) 
 
 Acceptance criteria: 
 
@@ -74,7 +74,7 @@ High
 
 5. 
 
-User story: 
+User story(7): 
 As a system administrator, I want to be able to add, read, update or delete broker profiles to ensure that the information is accurate and protect the integrity of the website. 
 
 Acceptance criteria: 

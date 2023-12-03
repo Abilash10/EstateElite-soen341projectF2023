@@ -19,6 +19,7 @@
   justify-content: center;
   align-items: center;
   display: flex;
+  white-space: nowrap;
 }
 .menu ul {
   list-style-type: none;

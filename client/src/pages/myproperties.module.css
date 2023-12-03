@@ -1,16 +1,102 @@
-.borderedLi li {
-    border: 1px solid black;
-    padding: 10px;
-    margin: 5px;
-    border-radius: 4px;
-  }
-  
-.editButton {
-    float: right;
-    font-size: 20px;
+.borderedLi {
+    list-style-type: none;
+    padding: 0;
 }
 
+.borderedLi li {
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    background-color: #f8f8f8;
+}
+
+.borderedLi li:hover {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.borderedLi li img {
+    width: 60%; 
+    height: 500px; 
+    object-fit: cover; 
+    display: block;
+    margin: 0 auto 20px;
+    border-radius: 4px;
+}
+
+.propertyInfo {
+    margin-bottom: 15px;
+}
+
+.propertyInfo h2 {
+    color: #333;
+    font-size: 1.6em;
+    margin-bottom: 10px;
+}
+
+
+
+.editButton {
+    background-color: #f0f0f0; 
+    color: #333; 
+    border: 1px solid #ccc; 
+    padding: 6px 12px; 
+    margin-left: 10px;
+ 
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); 
+    text-transform: uppercase; 
+    font-weight: 600; 
+}
+
+.editButton:hover {
+    background-color: #e9ecef; 
+    border-color: #adb5bd; 
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15); 
+}
 .deleteButton {
-    float: right;
-    font-size: 20px;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    margin: 5px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.deleteButton:hover {
+    background-color: #c82333;
+}
+
+
+.inputField {
+    border: 1px solid #ddd;
+    padding: 8px;
+    border-radius: 4px;
+    margin-right: 10px;
+    font-size: 14px;
+    width: 100px;
+}
+
+.updateButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.updateButton:hover {
+    background-color: #0056b3;
 }
